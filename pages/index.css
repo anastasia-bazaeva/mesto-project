@@ -22,6 +22,24 @@ padding: 45px 200px 60px;
 font-family: 'Inter', 'Arial', sans-serif;
 }
 
+@media screen and (max-width: 1100px) {
+
+    .page {
+        padding: 45px 100px 60px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .page {
+        padding: 45px 50px 60px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .page {
+        padding: 45px 19px 60px;
+    }
+}
 
 .header {
 margin: 0;
@@ -62,13 +80,23 @@ flex-direction: row;
 justify-content: space-between;
 width: 100%;
 align-items: center;
+flex-wrap: wrap;
 }
+
 
 .profile__about {
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 18px;
+}
+
+@media screen and (max-width: 650px) {
+    .profile__about {
+        flex-direction: column;
+        margin: 0 auto;
+        text-align: center;
+    }
 }
 .profile__photo {
     background-image: url(../images/profile-image.jpg);
@@ -81,6 +109,12 @@ align-items: center;
     margin: 0 12px 0 0;
     padding: 0;
 }
+
+.profile__user {
+display: flex;
+flex-direction: row;
+}
+
 .profile__name {
 margin:0 0 16px 0;
 padding: 0;
@@ -107,8 +141,13 @@ line-height: 22px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px;
-    align-self: baseline;
-    margin-top: calc(77px - 40px);
+    align-self: flex-start;
+    margin-top: calc(77px - 48px - 16px);
+    margin-left: 18px;
+}
+
+.profile__edit-button:hover {
+    opacity: .6;
 }
 
 .profile__add-button {
@@ -121,6 +160,18 @@ line-height: 22px;
     border: 2px solid #FFFFFF;
     border-radius: 2px;
 
+}
+
+.profile__add-button:hover {
+opacity: .6;
+}
+
+@media screen and (max-width: 950px) {
+    .profile__add-button {
+        width: 100%;
+        margin-top: 36px;
+    } 
+    
 }
 
 .elements {
@@ -142,6 +193,11 @@ justify-content: space-between;
 border-radius: 10px;
 
 }
+
+.elements__mesto:hover {
+    transform: scale(1.01);
+}
+
 .elements__image {
     width: 100%;
     height: 100%;
@@ -173,15 +229,21 @@ max-width: calc(100% - 22px - 2*20px - 20px);
 }
 
 .elements__like-button {
-    background-image: url(../images/Vector-heart.svg);
-    fill:none;
-    stroke: #000000;
-    background-position: center;
-    background-size: cover;
     width: 22px;
     height: 19px;
     margin: 0 20px;
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2px;
+}
 
+.elements__like-button:hover {
+    opacity: .5;
+}
+
+
+.elements__like-button_active {
+    fill: #000000;
 }
 
 .footer {
