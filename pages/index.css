@@ -1,263 +1,142 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__line/header__line.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/content/content.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__about/profile__about.css);
+@import url(../blocks/profile/__photo/profile__photo.css);
+@import url(../blocks/profile/__user/profile__user.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/elements/__mesto/elements__mesto.css);
+@import url(../blocks/elements/__image/elements__image.css);
+@import url(../blocks/elements/__info/elements__info.css);
+@import url(../blocks/elements/__title/elements__title.css);
+@import url(../blocks/elements/__like-button/elements__like-button.css);
+@import url(../blocks/elements/__like-button/_active/elements__like-button_active.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__window/popup__window.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__button/_status/popup__button_status_close.css);
+@import url(../blocks/popup/__button/_status/popup__button_status_save.css);
+@import url(../blocks/popup/__item/popup__item.css);
 
 html {
     background-color:lightseagreen;
 }
-/* div {
-    border: 1px solid red;
-} */
 
-.page {
-background-color: #000;
-margin: 0 auto;
-max-width: 1280px;
-display: flex;
-flex-direction: column;
-align-items: center;
-color: #fff;
-box-sizing: border-box;
-min-height: 100vh;
-padding: 45px 200px 60px;
-font-family: 'Inter', 'Arial', sans-serif;
-}
-
-@media screen and (max-width: 1100px) {
-
-    .page {
-        padding: 45px 100px 60px;
-    }
-}
-
-@media screen and (max-width: 950px) {
-    .page {
-        padding: 45px 50px 60px;
-    }
-}
-
-@media screen and (max-width: 650px) {
-    .page {
-        padding: 45px 19px 60px;
-    }
-}
-
-.header {
-margin: 0;
-padding: 0;
-width: 100%;
-display: flex;
-flex-direction: column;
-padding-bottom: 40px;
-}
-
-.header__logo {
-background-image: url(../images/Vector.svg);
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-width: 142px;
-height: 33px;
-margin-bottom: 41px;
-}
-
-.header__line {
-    border-bottom: 1px solid #545454;
-    opacity: .7;
-}
-
-.content {
-width: 100%;
-flex: 1;
-color: #fff;
-box-sizing: border-box;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-.profile {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
-align-items: center;
-flex-wrap: wrap;
-}
-
-
-.profile__about {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 18px;
-}
-
-@media screen and (max-width: 650px) {
-    .profile__about {
-        flex-direction: column;
-        margin: 0 auto;
-        text-align: center;
-    }
-}
-.profile__photo {
-    background-image: url(../images/profile-image.jpg);
-    width: 120px;
-    height: 120px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    margin: 0 12px 0 0;
-    padding: 0;
-}
-
-.profile__user {
-display: flex;
-flex-direction: row;
-}
-
-.profile__name {
-margin:0 0 16px 0;
-padding: 0;
-font-style: medium;
-font-weight: 500;
-font-size: 42px;
-line-height: 48px;
-}
-
-.profile__description {
-    margin:0;
-    padding: 0; 
-    font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 22px;
-}
-
-.profile__edit-button {
-    width: 24px;
-    height: 24px;
-    border: 1px solid #FFFFFF;
-    background-image: url(../images/edit.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 10px;
-    align-self: flex-start;
-    margin-top: calc(77px - 48px - 16px);
-    margin-left: 18px;
-}
-
-.profile__edit-button:hover {
-    opacity: .6;
-}
-
-.profile__add-button {
-    width: 150px;
-    height: 50px;
-    background-image: url(../images/add.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 22px;
-    border: 2px solid #FFFFFF;
-    border-radius: 2px;
-
-}
-
-.profile__add-button:hover {
-opacity: .6;
-}
-
-@media screen and (max-width: 950px) {
-    .profile__add-button {
-        width: 100%;
-        margin-top: 36px;
-    } 
-    
-}
-
-.elements {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-    grid-template-rows: auto;
-    column-gap: 17px;
-    row-gap: 20px;
-    padding: 50px 0 66px;
-}
-
-.elements__mesto {
-background-color: #fff;
-color:#000;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-border-radius: 10px;
-
-}
-
-.elements__mesto:hover {
-    transform: scale(1.01);
-}
-
-.elements__image {
+/* .popup {
+    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    aspect-ratio: 1/1;
-    border-radius: 10px 10px 0px 0px;
-}
+    background-color: rgb(0, 0, 0, .5);
+    background-size: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+} */
 
-.elements__info {
-    width: 100%;
+/* .popup_opened {
+    display: flex;
+} */
+
+/* .popup__window {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 25px 0 32px;
-}
+    align-content: flex-start;
+    margin-top: calc(155px - 45px);
+    padding-left: 40px;
+} */
 
-.elements__title {
+/* .popup__container {
+background-color: #fff;
+max-width: 430px;
+max-height: 330px;
+color: #000000;
+border-radius: 10px;
+margin-top: 40px;
+box-sizing: border-box;
+padding: 0 36px;
+} */
+
+/* .popup__form {
+    border: none;
+    margin: 0;
+    padding: 0;
+} */
+
+/* .popup__heading {
+margin: 34px 0 48px;
+font-style: bold;
 font-weight: 900;
 font-size: 24px;
 line-height: 29px;
-font-style: bold;
-margin: 0 0 0 21px;
-padding: 0;
-text-overflow: ellipsis;
-white-space: nowrap;
-overflow: hidden;
-max-width: calc(100% - 22px - 2*20px - 20px);
-}
+} */
 
-.elements__like-button {
-    width: 22px;
-    height: 19px;
-    margin: 0 20px;
-    fill: none;
-    stroke: #000000;
-    stroke-width: 2px;
-}
-
-.elements__like-button:hover {
-    opacity: .5;
-}
-
-
-.elements__like-button_active {
-    fill: #000000;
-}
-
-.footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
-}
-.footer__copyright {
-    margin: 0;
+/* .popup__button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
     padding: 0;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #545454;
+} */
+
+/* .popup__button_status_close {
+    background-image: url(../images/Close\ Icon.svg);
+    background-position: cover;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px; 
+    margin-left: 8px;
 }
+.popup__button_status_close:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 650px) {
+    .popup__button_status_close {
+       background-size: 20px;
+    }
+} */
+
+/* .popup__button_status_save {
+width: 100%;
+height: 50px;
+margin-top: calc(48px - 30px);
+margin-bottom: 37px;
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+}
+
+.popup__button_status_save:hover {
+    opacity: .8;
+} */
+
+/* .popup__item {
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+color: #000000;
+height: 27px;
+width: 100%;
+border: none;
+border-bottom: 1px solid #000000;
+margin-bottom: 30px;
+padding: 0;
+} */

@@ -1,0 +1,7 @@
+.popup__window {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    margin-top: calc(155px - 45px);
+    padding-left: 40px;
+}
