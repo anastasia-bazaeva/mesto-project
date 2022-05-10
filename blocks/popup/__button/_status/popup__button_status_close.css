@@ -12,5 +12,9 @@
 @media screen and (max-width: 650px) {
     .popup__button_status_close {
        background-size: 20px;
+       position: absolute;
+       right: 0;
+       width: 20px;
+       height: 20px;
     }
 }

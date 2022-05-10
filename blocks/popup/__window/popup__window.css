@@ -4,4 +4,11 @@
     justify-items: flex-start;
     margin-top: calc(155px - 45px);
     padding-left: 40px;
+    position: relative;
+}
+@media screen and (max-width: 650px) {
+    .popup__window {
+      padding-left: 0;
+      margin-top: calc(123px - 45px);
+    }
 }
