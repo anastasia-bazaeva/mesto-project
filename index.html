@@ -8,13 +8,13 @@
       <title>Mesto Russia</title>
   </head>
    <body class="page">
-    <div class="popup popup_opened">
+    <div class="popup ">
         <div class="popup__window">
         <form class="popup__container">
             <fieldset class="popup__form popup__form_edit_profile">
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <input class="popup__item popup__item_el_name" type="text" id="name" placeholder="Кто Вы?" value="Жак-Ив Кусто">
-                <input class="popup__item popup__item_el_description" type="text" id="description" placeholder="Чем вы занимаетесь?" value="Исследователь океана">
+                <input class="popup__item popup__item_el_name" type="text" id="name" placeholder="Жак-Ив Кусто" maxlength="50">
+                <input class="popup__item popup__item_el_description" type="text" id="description" placeholder="Исследователь океана" maxlength="100">
             </fieldset>
             <fieldset class="popup__form popup_form_button_save">
                 <input class="popup__button popup__button_status_save" type="submit" value="Сохранить">
@@ -43,54 +43,60 @@
                    <img class="elements__image" src="./images/karachaevo-cherkessk.jpg" alt="Строение на фоне леса и гор">
                    <div class="elements__info">
                     <h2 class="elements__title">Карачаево-Черкесск</h2>
-                    <svg class="elements__like-button elements__like-button_active" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="elements__button"><svg class="elements__like-button elements__like-button_active" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                         </svg>
+                    </button>
                    </div>
                </div>
                <div class="elements__mesto">
                  <img class="elements__image" src="./images/elbrus.jpg" alt="Гора Эльбрус на фоне заката">
                  <div class="elements__info">
                     <h2 class="elements__title">Гора Эльбрус</h2>
-                    <svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="elements__button"><svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                         </svg>
+                    </button>
                    </div>
                </div>
                <div class="elements__mesto">
                  <img class="elements__image" src="./images/dombay.jpg" alt="Снежная вершина горы">
                  <div class="elements__info">
                  <h2 class="elements__title">Домбай</h2>
-                 <svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <button class="elements__button"><svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                     </svg>
+                </button>
                 </div>
               </div>
               <div class="elements__mesto">
                  <img class="elements__image" src="./images/konduki.jpg" alt="Вид на Кондуки">
                  <div class="elements__info">
                     <h2 class="elements__title">Кондуки</h2>
-                    <svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="elements__button"><svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                         </svg>
+                    </button>
                    </div>
               </div>
               <div class="elements__mesto">
                  <img class="elements__image" src="./images/olkhon.jpg" alt="Ледяной Байкал и остров Ольхон">
                  <div class="elements__info">
                     <h2 class="elements__title">Остров Ольхон</h2>
-                    <svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="elements__button"><svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                         </svg>
+                    </button>
                    </div>
              </div>
              <div class="elements__mesto">
                  <img class="elements__image" src="./images/ozero-khudozhnikov.jpg" alt="Деревья на берегу туманного озера">
                  <div class="elements__info">
                     <h2 class="elements__title">Озеро Художников</h2>
-                    <svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="elements__button"><svg class="elements__like-button" viewBox="-1 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2991 1.68186C22.567 3.90213 22.567 7.54338 20.2991 9.78586L10.9804 19L1.6841 9.80806C0.606277 8.72013 0 7.27695 0 5.74496C0 4.21297 0.583823 2.76979 1.6841 1.68186C3.92957 -0.560619 7.61215 -0.560619 9.88007 1.70406L10.9804 2.792L12.0806 1.68186C14.3486 -0.560619 18.0311 -0.560619 20.2991 1.68186Z"/>
                         </svg>
+                    </button>
                    </div>
             </div>
            </section>
