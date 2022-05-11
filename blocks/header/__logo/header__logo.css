@@ -1,16 +1,14 @@
 .header__logo {
-    background-image: url(../../../images/Vector.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     width: 142px;
     height: 33px;
     margin-bottom: 41px;
+    object-fit: cover;
     }
 
     @media screen and (max-width: 650px) {
-        .elements {
+        .header__logo {
             width: 103.74px;
             height: 24.4px;
+            margin-left: 27px;
         }
     }

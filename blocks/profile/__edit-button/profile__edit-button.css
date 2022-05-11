@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px;
-    background-color: #000000;
+    background-color: transparent;
     align-self: flex-start;
     margin-top: calc(77px - 48px - 16px);
     margin-left: 18px;
@@ -22,5 +22,6 @@
        width: 18px;
        height: 18px;
        margin-top: 32px;
+       margin-left: 10px;
     }
 }
