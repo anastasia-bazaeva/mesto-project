@@ -1,4 +1,4 @@
-.elements__button {
+.mesto__button {
     border: none;
     background-color: #fff;
     background-image: url(../../../images/Vector-heart.svg);
@@ -7,8 +7,9 @@
     width: 22px;
     height: 19px;
     margin: 0 20px;
+    cursor: pointer;
 }
 
-.elements__button:hover {
+.mesto__button:hover {
     opacity: .5;
 }
