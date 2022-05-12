@@ -12,4 +12,4 @@
 * изображения из источника, не нарушающего авторские права
 * медиазапросы для поддержания адаптива
 
-[Ссылка на проект github](https://github.com/anastasia-bazaeva/Mesto)
+[Ссылка на проект github](https://anastasia-bazaeva.github.io/mesto-project/index.html)
