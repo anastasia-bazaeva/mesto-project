@@ -38,24 +38,40 @@ popupAdd.querySelector('.popup__button_status_close').addEventListener('click', 
 
 //код для добавления новой картинки с Местом
 
-let addButton = document.querySelector('.popup__button_status_create');
-let mestoContainer = document.querySelector('.elements');
+const addButton = document.querySelector('.popup__button_status_create');
+const mestoContainer = document.querySelector('.elements');
 addButton.onclick = function (evt) {
   evt.preventDefault();
 }
 
 function addMesto() {
-  let placeName = document.querySelector('.popup__item_el_place-name');
-  let placeUrl = document.querySelector('.popup__item_el_place-url');
-  mestoContainer.insertAdjacentHTML ('afterbegin',`
-        <div class="mesto">
-                 <img class="mesto__image" src="${placeUrl.value}" alt="Добавленная пользователем картинка">
-                 <div class="mesto__info">
-                    <h2 class="mesto__title">${placeName.value}</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-            </div>`);
-            placeUrl.value = '';
-            placeName.value = '';
+    const placeName = document.querySelector('.popup__item_el_place-name');
+    const placeUrl = document.querySelector('.popup__item_el_place-url');
+    const newMesto = document.querySelector('#new-mesto').content;
+    const mestoItem = newMesto.querySelector('.mesto').cloneNode(true);
+
+    mestoItem.querySelector('.mesto__title').textContent = placeName.value;
+    mestoItem.querySelector('.mesto__image').src = placeUrl.value;
+    placeUrl.value = '';
+    placeName.value = '';
+  
+  mestoContainer.prepend(mestoItem);
 }
 addButton.addEventListener('click', addMesto);
+
+//код для добавления новой картинки с Местом (если не заработает темплейт)
+// function addMesto() {
+//   let placeName = document.querySelector('.popup__item_el_place-name');
+//   let placeUrl = document.querySelector('.popup__item_el_place-url');
+//   mestoContainer.insertAdjacentHTML ('afterbegin',`
+//         <div class="mesto">
+//                  <img class="mesto__image" src="${placeUrl.value}" alt="Добавленная пользователем картинка">
+//                  <div class="mesto__info">
+//                     <h2 class="mesto__title">${placeName.value}</h2>
+//                     <button class="mesto__button" type="button"></button>
+//                    </div>
+//             </div>`);
+//             placeUrl.value = '';
+//             placeName.value = '';
+// }
+// addButton.addEventListener('click', addMesto);
