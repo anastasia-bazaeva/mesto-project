@@ -1,3 +1,4 @@
+// код для открытия и закрытия попапа редактирования профиля
 const popup = document.querySelector('.popup');
 
 const openPopup = () => {
@@ -15,6 +16,23 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 popup.querySelector('.popup__button_status_close').addEventListener('click', () => {
   closePopup();
 })
+
+// Код для редактирования профиля
+const editButton = document.querySelector('.popup__button_status_save');
+editButton.onclick = function (evt) {
+  evt.preventDefault();
+}
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+const updateName = document.querySelector('#name');
+const updateDescription = document.querySelector('#description');
+
+function editProfile() {
+  profileName.textContent = updateName.value;
+  profileDescription.textContent = updateDescription.value;
+}
+
+editButton.addEventListener('click', editProfile);
 
 // код для открытия и закрытия попапа добавления Места
 
@@ -56,6 +74,9 @@ function addMesto() {
     placeName.value = '';
   
   mestoContainer.prepend(mestoItem);
+  mestoItem.querySelector('.mesto__button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('mesto__button_active');
+  });
 }
 addButton.addEventListener('click', addMesto);
 
@@ -75,3 +96,15 @@ addButton.addEventListener('click', addMesto);
 //             placeName.value = '';
 // }
 // addButton.addEventListener('click', addMesto);
+
+// код для установки и снятия лайка
+const mestoList = document.getElementsByClassName('mesto');
+const mestoArray = Array.from(mestoList);
+
+mestoArray.forEach((mestoList) => {
+  mestoList.querySelector('.mesto__button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('mesto__button_active');
+  });
+});
+
+
