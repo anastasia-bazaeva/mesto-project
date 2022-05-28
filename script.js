@@ -110,6 +110,18 @@ mestoArray.forEach((mestoList) => {
   });
 });
 
+//код для удаления карточки
+
+// let mestoDelete = () => {
+//   mestoList.classList.add('mesto__hidden');
+// }
+
+// mestoArray.forEach((mestoList) => {
+//   mestoList.querySelector('.mesto__delete').addEventListener('click', () => {
+//     mestoDelete();
+//   })
+// })
+
 //код для открытия и закрытия попапа с увеличенной картинкой
 
 const popupZoom = document.querySelector('.popup_zoom-picture');
@@ -126,7 +138,7 @@ mestoArray.forEach((mestoList) => {
   mestoList.querySelector('.mesto__image').addEventListener('click', () => {
     openPopupZoom();
   })
-})
+});
 
 popupZoom.querySelector('.popup__button_zoom_close').addEventListener('click', () => {
   closePopupZoom();
