@@ -76,7 +76,10 @@ function addMesto() {
   mestoContainer.prepend(mestoItem);
   mestoItem.querySelector('.mesto__button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('mesto__button_active');
-  });
+  })
+  mestoItem.querySelector('.mesto__image').addEventListener('click', () => {
+    openPopupZoom();
+  })
 }
 addButton.addEventListener('click', addMesto);
 
@@ -107,4 +110,25 @@ mestoArray.forEach((mestoList) => {
   });
 });
 
+//код для открытия и закрытия попапа с увеличенной картинкой
+
+const popupZoom = document.querySelector('.popup_zoom-picture');
+
+const openPopupZoom = () => {
+  popupZoom.classList.add('popup_opened');
+}
+
+const closePopupZoom = () => {
+  popupZoom.classList.remove('popup_opened');
+}
+
+mestoArray.forEach((mestoList) => {
+  mestoList.querySelector('.mesto__image').addEventListener('click', () => {
+    openPopupZoom();
+  })
+})
+
+popupZoom.querySelector('.popup__button_zoom_close').addEventListener('click', () => {
+  closePopupZoom();
+})
 

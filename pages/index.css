@@ -89,3 +89,23 @@
     line-height: 17px;
     color: #C4C4C4;
 }
+
+.popup__button_zoom_close {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    background-image: url(../images/Close-icon.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 32px;
+    height: 32px; 
+}
+
+.popup__zoom-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
