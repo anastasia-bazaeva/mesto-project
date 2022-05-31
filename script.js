@@ -1,3 +1,69 @@
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+  ];
+const mestoContainer = document.querySelector('.elements');
+const popupZoom = document.querySelector('.popup_zoom-picture');
+const zoomPic = document.querySelector('.popup__zoom-pic');
+const zoomName = document.querySelector('.popup__zoom-title');
+const openPopupZoom = () => popupZoom.classList.add('popup_opened');
+const closePopupZoom = () => popupZoom.classList.remove('popup_opened');
+
+initialCards.forEach ((data) => {
+    const mestoCard = document.querySelector('#new-mesto').content;
+    const mestoElement = mestoCard.querySelector('.mesto').cloneNode(true);
+
+    mestoElement.querySelector('.mesto__title').textContent = data.name;
+    mestoElement.querySelector('.mesto__image').src = data.link;
+    mestoElement.querySelector('.mesto__image').alt = data.name;
+    mestoContainer.append(mestoElement);
+
+    mestoElement.querySelector('.mesto__image').addEventListener('click', () => {
+          openPopupZoom();
+          zoomPic.src = data.link;
+          zoomName.textContent = data.name;
+        })
+    popupZoom.querySelector('.popup__button_zoom_close').addEventListener('click', () => {
+          closePopupZoom();
+        })
+    const mestoDelete = () => mestoElement.classList.add('mesto__hidden');
+    mestoElement.querySelector('.mesto__delete').addEventListener('click', () => {
+              mestoDelete();
+            })
+  })
+
+ // код для установки и снятия лайка
+const mestoList = document.getElementsByClassName('mesto');
+const mestoArray = Array.from(mestoList);
+
+mestoArray.forEach((mestoList) => {
+  mestoList.querySelector('.mesto__button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('mesto__button_active');
+  });
+});
+
 // код для открытия и закрытия попапа редактирования профиля
 const popup = document.querySelector('.popup');
 
@@ -57,7 +123,6 @@ popupAdd.querySelector('.popup__button_status_close').addEventListener('click', 
 //код для добавления новой картинки с Местом
 
 const addButton = document.querySelector('.popup__button_status_create');
-const mestoContainer = document.querySelector('.elements');
 addButton.onclick = function (evt) {
   evt.preventDefault();
 }
@@ -79,7 +144,13 @@ function addMesto() {
   })
   mestoItem.querySelector('.mesto__image').addEventListener('click', () => {
     openPopupZoom();
+    zoomPic.src = mestoItem.querySelector('.mesto__image').src;
+    zoomName.textContent = mestoItem.querySelector('.mesto__title').textContent;
   })
+  const mestoDelete = () => mestoItem.classList.add('mesto__hidden');
+  mestoItem.querySelector('.mesto__delete').addEventListener('click', () => {
+        mestoDelete();
+      })
 }
 addButton.addEventListener('click', addMesto);
 
@@ -99,48 +170,3 @@ addButton.addEventListener('click', addMesto);
 //             placeName.value = '';
 // }
 // addButton.addEventListener('click', addMesto);
-
-// код для установки и снятия лайка
-const mestoList = document.getElementsByClassName('mesto');
-const mestoArray = Array.from(mestoList);
-
-mestoArray.forEach((mestoList) => {
-  mestoList.querySelector('.mesto__button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('mesto__button_active');
-  });
-});
-
-//код для удаления карточки
-
-// let mestoDelete = () => {
-//   mestoList.classList.add('mesto__hidden');
-// }
-
-// mestoArray.forEach((mestoList) => {
-//   mestoList.querySelector('.mesto__delete').addEventListener('click', () => {
-//     mestoDelete();
-//   })
-// })
-
-//код для открытия и закрытия попапа с увеличенной картинкой
-
-const popupZoom = document.querySelector('.popup_zoom-picture');
-
-const openPopupZoom = () => {
-  popupZoom.classList.add('popup_opened');
-}
-
-const closePopupZoom = () => {
-  popupZoom.classList.remove('popup_opened');
-}
-
-mestoArray.forEach((mestoList) => {
-  mestoList.querySelector('.mesto__image').addEventListener('click', () => {
-    openPopupZoom();
-  })
-});
-
-popupZoom.querySelector('.popup__button_zoom_close').addEventListener('click', () => {
-  closePopupZoom();
-})
-
