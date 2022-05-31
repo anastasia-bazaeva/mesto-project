@@ -45,10 +45,10 @@ initialCards.forEach ((data) => {
           zoomPic.src = data.link;
           zoomName.textContent = data.name;
         })
-    popupZoom.querySelector('.popup__button_zoom_close').addEventListener('click', () => {
+    popupZoom.querySelector('.popup__button_status_zoom-close').addEventListener('click', () => {
           closePopupZoom();
         })
-    const mestoDelete = () => mestoElement.classList.add('mesto__hidden');
+    const mestoDelete = () => mestoElement.classList.add('mesto_hidden');
     mestoElement.querySelector('.mesto__delete').addEventListener('click', () => {
               mestoDelete();
             })
@@ -147,7 +147,7 @@ function addMesto() {
     zoomPic.src = mestoItem.querySelector('.mesto__image').src;
     zoomName.textContent = mestoItem.querySelector('.mesto__title').textContent;
   })
-  const mestoDelete = () => mestoItem.classList.add('mesto__hidden');
+  const mestoDelete = () => mestoItem.classList.add('mesto_hidden');
   mestoItem.querySelector('.mesto__delete').addEventListener('click', () => {
         mestoDelete();
       })
