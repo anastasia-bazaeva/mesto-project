@@ -31,4 +31,11 @@
 @import url(../blocks/popup/__button/_status/popup__button_status_close.css);
 @import url(../blocks/popup/__button/_status/popup__button_status_save.css);
 @import url(../blocks/popup/__item/popup__item.css);
-
+@import url(../blocks/popup/__button/_status/popup__button_status_create.css);
+@import url(../blocks/popup/__item/form/popup__item_form_place-add.css);
+@import url(../blocks/popup/__button/_status/popup__button_status_zoom-close.css);
+@import url(../blocks/popup/_zoom-window/popup_zoom-window.css);
+@import url(../blocks/popup/__zoom-title/popup__zoom-title.css);
+@import url(../blocks/popup/__zoom-pic/popup__zoom-pic.css);
+@import url(../blocks/mesto/__delete/mesto__delete.css);
+@import url(../blocks/mesto/_hidden/mesto_hidden.css);
