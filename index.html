@@ -26,48 +26,6 @@
                 <button class="profile__add-button" type="button"></button>
            </section>
            <section class="elements">
-               <div class="mesto">
-                   <img class="mesto__image" src="./images/karachaevo-cherkessk.jpg" alt="Строение на фоне леса и гор">
-                   <div class="mesto__info">
-                    <h2 class="mesto__title">Карачаево-Черкесск</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-               </div>
-               <div class="mesto">
-                 <img class="mesto__image" src="./images/elbrus.jpg" alt="Гора Эльбрус на фоне заката">
-                 <div class="mesto__info">
-                    <h2 class="mesto__title">Гора Эльбрус</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-               </div>
-               <div class="mesto">
-                 <img class="mesto__image" src="./images/dombay.jpg" alt="Снежная вершина горы">
-                 <div class="mesto__info">
-                 <h2 class="mesto__title">Домбай</h2>
-                 <button class="mesto__button" type="button"></button>
-                </div>
-              </div>
-              <div class="mesto">
-                 <img class="mesto__image" src="./images/konduki.jpg" alt="Вид на Кондуки">
-                 <div class="mesto__info">
-                    <h2 class="mesto__title">Кондуки</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-              </div>
-              <div class="mesto">
-                 <img class="mesto__image" src="./images/olkhon.jpg" alt="Ледяной Байкал и остров Ольхон">
-                 <div class="mesto__info">
-                    <h2 class="mesto__title">Остров Ольхон</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-             </div>
-             <div class="mesto">
-                 <img class="mesto__image" src="./images/ozero-khudozhnikov.jpg" alt="Деревья на берегу туманного озера">
-                 <div class="mesto__info">
-                    <h2 class="mesto__title">Озеро Художников</h2>
-                    <button class="mesto__button" type="button"></button>
-                   </div>
-            </div>
            </section>
        </main>
        <footer class="footer">
@@ -86,20 +44,36 @@
         <button class="popup__button popup__button_status_close" type="button"></button>
      </div>
     </div>
-    <div class="popup new-place popup_opened">
+    <div class="popup popup_form_new-place">
         <div class="popup__window">
         <form class="popup__container" name="profile_add">
             <fieldset class="popup__form place-adding">
                 <h2 class="popup__heading">Новое место</h2>
                 <input class="popup__item popup__item_el_place-name popup__item_form_place-add" name="place-name" type="text" id="place-name" placeholder="Название" maxlength="50">
-                <input class="popup__item popup__item_el_place-url popup__item_form_place-add" name="description" type="text" id="description" placeholder="Ссылка на место">
+                <input class="popup__item popup__item_el_place-url popup__item_form_place-add" name="place-description" type="text" id="place-description" placeholder="Ссылка на место">
                 <button class="popup__button popup__button_status_create" type="submit">Создать</button>
             </fieldset>
         </form>
         <button class="popup__button popup__button_status_close" type="button"></button>
      </div>
     </div>
+    <div class="popup popup_zoom-picture">
+        <div class="popup__window popup_zoom-window">
+        <button class="popup__button popup__button_status_zoom-close" type="button"></button>
+        <img class="popup__zoom-pic" src="" alt="">
+        <h2 class="popup__zoom-title">Test</h2>
+     </div>
+    </div>
+    <template id="new-mesto">
+        <div class="mesto">
+            <button class="mesto__delete" type="button"></button>
+            <img class="mesto__image" src="" alt="Добавленная пользователем картинка">
+            <div class="mesto__info">
+               <h2 class="mesto__title"></h2>
+               <button class="mesto__button" type="button"></button>
+              </div>
+       </div>
+    </template>
     <script src="./script.js"></script>
    </body>
 </html>
-
