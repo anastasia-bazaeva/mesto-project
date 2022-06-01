@@ -12,4 +12,4 @@
 * медиазапросы для поддержания адаптива
 * работа с функциями и массивами на javaScript для реализации интерактивных элементов
 
-[Ссылка на проект github](https://anastasia-bazaeva.github.io/mesto-project/index.html)
+[Ссылка на проект github](https://anastasia-bazaeva.github.io/mesto-project/)
