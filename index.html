@@ -4,7 +4,6 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="./pages/index.css">
-      <!-- <link rel="icon" href="images/" > -->
       <title>Mesto Russia</title>
   </head>
    <body class="page">
@@ -31,14 +30,14 @@
        <footer class="footer">
            <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
        </footer>
-       <div class="popup">
+       <div class="popup popup_form_edit-profile">
         <div class="popup__window">
-        <form class="popup__container" name="profile_edit">
+        <form class="popup__container popup_profile-edit" name="profile_edit">
             <fieldset class="popup__form">
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <input class="popup__item popup__item_el_name" name="name" type="text" id="name" placeholder="Жак-Ив Кусто" maxlength="50">
-                <input class="popup__item popup__item_el_description" name="description" type="text" id="description" placeholder="Исследователь океана" maxlength="100">
-                <button class="popup__button popup__button_status_save" type="submit">Сохранить</button>
+                <input class="popup__item popup__item_el_name" name="name" type="text" id="name" placeholder="Ваше имя" maxlength="50">
+                <input class="popup__item popup__item_el_description" name="description" type="text" id="description" placeholder="Чем вы занимаетесь" maxlength="100">
+                <button class="popup__button popup__button_status_save" type="submit" id="submit-profile">Сохранить</button>
             </fieldset>
         </form>
         <button class="popup__button popup__button_status_close" type="button"></button>
@@ -46,7 +45,7 @@
     </div>
     <div class="popup popup_form_new-place">
         <div class="popup__window">
-        <form class="popup__container" name="profile_add">
+        <form class="popup__container popup_place-add" name="profile_add">
             <fieldset class="popup__form place-adding">
                 <h2 class="popup__heading">Новое место</h2>
                 <input class="popup__item popup__item_el_place-name popup__item_form_place-add" name="place-name" type="text" id="place-name" placeholder="Название" maxlength="50">
@@ -67,7 +66,7 @@
     <template id="new-mesto">
         <div class="mesto">
             <button class="mesto__delete" type="button"></button>
-            <img class="mesto__image" src="" alt="Добавленная пользователем картинка">
+            <img class="mesto__image" src="" alt="">
             <div class="mesto__info">
                <h2 class="mesto__title"></h2>
                <button class="mesto__button" type="button"></button>
