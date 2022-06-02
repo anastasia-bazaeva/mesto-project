@@ -1,7 +1,7 @@
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
@@ -33,8 +33,18 @@ const mestoContainer = document.querySelector('.elements');
 const popupZoom = document.querySelector('.popup_zoom-picture');
 const zoomPic = document.querySelector('.popup__zoom-pic');
 const zoomName = document.querySelector('.popup__zoom-title');
+const popupEdit = document.querySelector('.popup_form_edit-profile');
+const popupAdd = document.querySelector('.popup_form_new-place');
+const editForm = document.querySelector('.popup_profile-edit');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+const updateName = document.querySelector('#name');
+const updateDescription = document.querySelector('#description');
+const addForm = document.querySelector('.popup_place-add');
+const addPopup = document.querySelector('.popup_form_new-place');
 
-//код создания новой карточки
+
+//функция создания новой карточки
 
 function createCard (data) { 
     const mestoCards = document.querySelector('#new-mesto').content;
@@ -67,7 +77,8 @@ function createCard (data) {
           evt.target.classList.toggle('mesto__button_active');
           });
   };
-//вызов создания новой карточки для рендера исходных картинок
+
+//вызов функции создания новой карточки для рендера исходных картинок
 
 initialCardsInRigthOrder.forEach ((data) => {
   createCard(data);
@@ -75,20 +86,20 @@ initialCardsInRigthOrder.forEach ((data) => {
 
 // функции для открытия и закрытия попапов
 
-function openPopup (form) {
-  form.classList.add('popup_opened');
+function openPopup (popup) {
+  popup.classList.add('popup_opened');
 }
 
-function closePopup (form) {
-  form.classList.remove('popup_opened');
+function closePopup (popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //код для открытия и закрытия попапа редактирования профиля
 
-const popupEdit = document.querySelector('.popup_form_edit-profile');
-
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
   openPopup (popupEdit);
+  updateName.value = profileName.textContent;
+  updateDescription.value = profileDescription.textContent;
 });
 
 popupEdit.querySelector('.popup__button_status_close').addEventListener('click', () => {
@@ -96,8 +107,6 @@ popupEdit.querySelector('.popup__button_status_close').addEventListener('click',
 });
 
 // код для открытия и закрытия попапа добавления Места
-
-const popupAdd = document.querySelector('.popup_form_new-place');
 
 document.querySelector('.profile__add-button').addEventListener('click', () => {
   openPopup (popupAdd);
@@ -109,12 +118,6 @@ popupAdd.querySelector('.popup__button_status_close').addEventListener('click', 
 
 
 // Код для редактирования профиля
-
-const editForm = document.querySelector('.popup_profile-edit');
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-const updateName = document.querySelector('#name');
-const updateDescription = document.querySelector('#description');
 
 function editProfile() {
   profileName.textContent = updateName.value;
@@ -129,8 +132,6 @@ editForm.addEventListener('submit', function (evt) {
 
 //код для добавления новой картинки с Местом
 
-const addForm = document.querySelector('.popup_place-add');
-const addPopup = document.querySelector('.popup_form_new-place');
 
 addForm.addEventListener('submit', function (evt) {
   evt.preventDefault (); 
