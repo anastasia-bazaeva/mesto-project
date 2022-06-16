@@ -1,6 +1,6 @@
 .popup__container {
     background-color: #fff;
-    max-width: 430px;
+    width: 430px;
     color: #000000;
     border-radius: 10px;
     box-sizing: border-box;

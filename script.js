@@ -42,6 +42,9 @@ const updateName = document.querySelector('#name');
 const updateDescription = document.querySelector('#description');
 const addForm = document.querySelector('.popup_place-add');
 const addPopup = document.querySelector('.popup_form_new-place');
+const page = document.querySelector('.page');
+const anyPopup = document.querySelectorAll('.popup');
+const editAvatar = document.querySelector('.popup_edit_avatar');
 
 
 //функция создания новой карточки
@@ -151,3 +154,32 @@ function addMesto() {
     closePopup (addPopup);
   }
   
+  // колбек для закрытия попапов по esc
+  function escHandler(evt) {
+    const openedPopup = document.querySelector('.popup_opened');
+    if ((evt.key === 'Escape')&&(openedPopup)) {
+      closePopup(openedPopup);
+      }
+  }
+ 
+//слушатель для каждого попапа для закрытия по клику на оверлей
+
+  anyPopup.forEach(popup => { //попробовать переделать и все закрытия попапов по кнопке также
+    popup.addEventListener ('click', evt => {
+      const openedPopup = document.querySelector('.popup_opened');
+      if ((openedPopup)&&(evt.target.classList.contains('popup'))){ 
+        closePopup(evt.target.closest('.popup_opened'));
+      }
+      });
+  })
+
+//обработчик для страницы по нажатию на ecs
+  page.addEventListener ('keydown', escHandler);
+
+// код для закрытия попапа редактирования аватара
+document.querySelector('.profile_avatar-button').addEventListener('click', () => {
+  openPopup (editAvatar);
+})
+editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
+    closePopup (editAvatar);
+  })

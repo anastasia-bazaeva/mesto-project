@@ -39,3 +39,28 @@
 @import url(../blocks/popup/__zoom-pic/popup__zoom-pic.css);
 @import url(../blocks/mesto/__delete/mesto__delete.css);
 @import url(../blocks/mesto/_hidden/mesto_hidden.css);
+
+.profile_avatar-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 12px 0 0;
+    padding: 0;
+    background-color: #000000;
+    opacity: 0;
+    position: absolute;
+}
+
+.profile_avatar-button:hover {
+    opacity: .8;
+    background-image: url(../images/Vector_avatar.svg);
+    background-position: center;
+    background-size: 26px;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 650px) {
+    .profile_avatar-button {
+        margin: 0;
+    }
+}
