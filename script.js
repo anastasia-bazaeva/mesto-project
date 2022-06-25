@@ -43,7 +43,7 @@ const updateDescription = document.querySelector('#description');
 const addForm = document.querySelector('.popup_place-add');
 const addPopup = document.querySelector('.popup_form_new-place');
 const page = document.querySelector('.page');
-const anyPopup = document.querySelectorAll('.popup');
+const anyPopup = Array.from(document.querySelectorAll('.popup'));
 const editAvatar = document.querySelector('.popup_edit_avatar');
 
 
@@ -64,9 +64,11 @@ function createCard (data) {
           zoomPic.src = data.link;
           zoomName.textContent = data.name;
           zoomPic.alt = data.name;
+          page.addEventListener ('keydown', escHandler);
         })
     popupZoom.querySelector('.popup__button_status_zoom-close').addEventListener('click', () => {
           closePopup(popupZoom);
+          page.removeEventListener ('keydown', escHandler);
         })
     //удаление карточки
 
@@ -103,20 +105,24 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
   openPopup (popupEdit);
   updateName.value = profileName.textContent;
   updateDescription.value = profileDescription.textContent;
+  page.addEventListener ('keydown', escHandler);
 });
 
 popupEdit.querySelector('.popup__button_status_close').addEventListener('click', () => {
   closePopup (popupEdit);
+  page.removeEventListener ('keydown', escHandler);
 });
 
 // код для открытия и закрытия попапа добавления Места
 
 document.querySelector('.profile__add-button').addEventListener('click', () => {
   openPopup (popupAdd);
+  page.addEventListener ('keydown', escHandler);
 })
 
 popupAdd.querySelector('.popup__button_status_close').addEventListener('click', () => {
   closePopup (popupAdd);
+  page.removeEventListener ('keydown', escHandler);
 })
 
 
@@ -126,6 +132,7 @@ function editProfile() {
   profileName.textContent = updateName.value;
   profileDescription.textContent = updateDescription.value;
   closePopup(popupEdit);
+  page.removeEventListener ('keydown', escHandler);
 }
 
 editForm.addEventListener('submit', function (evt) {
@@ -133,13 +140,12 @@ editForm.addEventListener('submit', function (evt) {
   editProfile();
 });
 
-//код для добавления новой картинки с Местом
-
-
+// код для добавления новой картинки с Местом
 addForm.addEventListener('submit', function (evt) {
-  evt.preventDefault (); 
+  evt.preventDefault();
   addMesto ();
 });
+
 
 function addMesto() {
     const placeName = document.querySelector('.popup__item_el_place-name');
@@ -152,6 +158,7 @@ function addMesto() {
     placeUrl.value = '';
     placeName.value = ''; 
     closePopup (addPopup);
+    page.removeEventListener ('keydown', escHandler);
   }
   
   // колбек для закрытия попапов по esc
@@ -173,13 +180,82 @@ function addMesto() {
       });
   })
 
-//обработчик для страницы по нажатию на ecs
-  page.addEventListener ('keydown', escHandler);
+//обработчик для страницы по нажатию на ecs !прописан в открытии попапов и удаляется при закрытии
+  //page.addEventListener ('keydown', escHandler);
 
 // код для закрытия попапа редактирования аватара
 document.querySelector('.profile_avatar-button').addEventListener('click', () => {
   openPopup (editAvatar);
-})
+  page.addEventListener ('keydown', escHandler);
+});
 editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
     closePopup (editAvatar);
-  })
+    page.removeEventListener ('keydown', escHandler);
+  });
+
+//сделаем функции добавления и удаления сообщений об ошибках
+const showError = (errorElement, inputElement, config) => {
+  inputElement.classList.add(config.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+}
+
+const hideError = (errorElement, inputElement, config) => {
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+}
+
+//сделаем функцию проверки валидности полей формы
+const checkInputValidity = (inputElement, formElement, config) => {
+  const isInputValid = inputElement.validity.valid;
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  if(!isInputValid) {
+    showError(errorElement, inputElement, config);
+  } else {
+    hideError(errorElement, inputElement, config);
+  }
+}
+
+const toggleButton = (button, isActive = false, config) => {
+  if(isActive) {
+    button.classList.remove(config.inactiveButtonClass);
+    button.disabled = false;
+  } else {
+    button.classList.add(config.inactiveButtonClass);
+    button.disabled = 'disabled';
+  }
+}
+
+//сделаем слушатель на каждую форму и вызовем там проверку полей
+const setEventListener = (formElement, config) => {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const submitButton = formElement.querySelector(config.submitButtonSelector);
+  formElement.addEventListener('submit',(evt)=> {
+    evt.preventDefault();
+  });
+  inputList.forEach((input) => {
+    input.addEventListener('input', () => {
+      checkInputValidity(input, formElement, config);
+      toggleButton(submitButton, formElement.checkValidity(), config);
+    })
+  });
+}
+
+
+
+//Проверка отправки форм
+const enableValidation = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+  forms.forEach(form => {
+    setEventListener(form, config);
+    })
+}
+
+const enableValidationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'opup__button_state_inactive',
+  inputErrorClass: 'popup__item_state_invalid',
+}; 
+
+enableValidation(enableValidationConfig);
