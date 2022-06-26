@@ -193,6 +193,28 @@ editAvatar.querySelector('.popup__button_status_close').addEventListener('click'
     page.removeEventListener ('keydown', escHandler);
   });
 
+  const enableValidationConfig = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_state_inactive',
+    inputErrorClass: 'popup__item_state_invalid',
+    customMessages: {
+      urlMismatch: 'Введите адрес сайта',
+      missedInput: 'Вы пропустили это поле',
+    },
+  }; 
+
+const pickValidityMessage = (inputElement, config) => {
+  if (((inputElement.type !== 'url')&&(!inputElement.validity.valueMissing))||(inputElement.validity.valid)) {
+    return;
+  } else if (inputElement.validity.valueMissing) {
+    inputElement.setCustomValidity(config.customMessages.missedInput);
+  } else {
+    inputElement.setCustomValidity(config.customMessages.urlMismatch);
+  }
+}
+
 //сделаем функции добавления и удаления сообщений об ошибках
 const showError = (errorElement, inputElement, config) => {
   inputElement.classList.add(config.inputErrorClass);
@@ -206,8 +228,10 @@ const hideError = (errorElement, inputElement, config) => {
 
 //сделаем функцию проверки валидности полей формы
 const checkInputValidity = (inputElement, formElement, config) => {
+  inputElement.setCustomValidity('');
   const isInputValid = inputElement.validity.valid;
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  pickValidityMessage (inputElement, config);
   if(!isInputValid) {
     showError(errorElement, inputElement, config);
   } else {
@@ -218,7 +242,7 @@ const checkInputValidity = (inputElement, formElement, config) => {
 const toggleButton = (button, isActive = false, config) => {
   if(isActive) {
     button.classList.remove(config.inactiveButtonClass);
-    button.disabled = false;
+    button.disabled = '';
   } else {
     button.classList.add(config.inactiveButtonClass);
     button.disabled = 'disabled';
@@ -250,12 +274,5 @@ const enableValidation = (config) => {
     })
 }
 
-const enableValidationConfig = {
-  formSelector: '.popup__container',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'opup__button_state_inactive',
-  inputErrorClass: 'popup__item_state_invalid',
-}; 
 
 enableValidation(enableValidationConfig);
