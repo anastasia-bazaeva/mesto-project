@@ -99,12 +99,34 @@ function closePopup (popup) {
   popup.classList.remove('popup_opened');
 }
 
+const enableValidationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_state_inactive',
+  inputErrorClass: 'popup__item_state_invalid',
+  customMessages: {
+    urlMismatch: 'Введите адрес сайта',
+    missedInput: 'Вы пропустили это поле',
+  },
+}; 
+
 //код для открытия и закрытия попапа редактирования профиля
+
+const removeErrorSpan = (popup) => {
+  const errorSpan = Array.from(popup.querySelectorAll('.popup__item-error'));
+  errorSpan.forEach(span => {
+    span.textContent = '';
+  });
+}
+
 
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
   openPopup (popupEdit);
+  removeErrorSpan(popupEdit);
   updateName.value = profileName.textContent;
   updateDescription.value = profileDescription.textContent;
+  
   page.addEventListener ('keydown', escHandler);
 });
 
@@ -192,18 +214,6 @@ editAvatar.querySelector('.popup__button_status_close').addEventListener('click'
     closePopup (editAvatar);
     page.removeEventListener ('keydown', escHandler);
   });
-
-  const enableValidationConfig = {
-    formSelector: '.popup__container',
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_state_inactive',
-    inputErrorClass: 'popup__item_state_invalid',
-    customMessages: {
-      urlMismatch: 'Введите адрес сайта',
-      missedInput: 'Вы пропустили это поле',
-    },
-  }; 
 
 const pickValidityMessage = (inputElement, config) => {
   if (((inputElement.type !== 'url')&&(!inputElement.validity.valueMissing))||(inputElement.validity.valid)) {
