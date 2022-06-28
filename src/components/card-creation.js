@@ -2,7 +2,7 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
     addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './data.js';
 
-import { openPopup, closePopup, escHandler } from './index.js';
+import { openPopup, closePopup, editProfile, escHandler } from './modal.js';
 
 function createCard (data) { 
     const mestoCards = document.querySelector('#new-mesto').content;

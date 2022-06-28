@@ -1,17 +1,18 @@
 import './pages/index.css';
 
+// В проекте 2 папки blocks, я пыталась переместить и даже удалить ту, что не в src, но почему-то не получается
 
 // Импортируем данные
 import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './data.js';
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './components/data.js';
   
   // Импортируем и запускаем валидацию
-  import { removeErrorSpan, pickValidityMessage, showError, hideError, checkInputValidity, toggleButton, setEventListener, enableValidation} from './validation.js';  
+  import { removeErrorSpan, pickValidityMessage, showError, hideError, checkInputValidity, toggleButton, setEventListener, enableValidation} from './components/validation.js';  
     enableValidation(enableValidationConfig);
   
   //Импортируем создание карточек
-  import { createCard, addMesto } from './card-creation.js';
+  import { createCard, addMesto } from './components/card-creation.js';
   
   //вызов функции создания новой карточки для рендера исходных картинок
   
@@ -20,18 +21,11 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
   });
   
   // функции для открытия и закрытия попапов
+
+  import { openPopup, closePopup, editProfile, escHandler } from './components/modal.js';
   
-  function openPopup (popup) {
-    popup.classList.add('popup_opened');
-  }
-  
-  function closePopup (popup) {
-    popup.classList.remove('popup_opened');
-  }
-  
-  
-  //код для открытия и закрытия попапа редактирования профиля
-  
+ 
+  //слушатель для открытия и закрытия попапа редактирования профиля
   
   document.querySelector('.profile__edit-button').addEventListener('click', () => {
     openPopup (popupEdit);
@@ -47,7 +41,7 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
     page.removeEventListener ('keydown', escHandler);
   });
   
-  // код для открытия и закрытия попапа добавления Места
+  // слушатель для открытия и закрытия попапа добавления Места
   
   document.querySelector('.profile__add-button').addEventListener('click', () => {
     openPopup (popupAdd);
@@ -60,35 +54,19 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
   })
   
   
-  // Код для редактирования профиля
-  
-  function editProfile() {
-    profileName.textContent = updateName.value;
-    profileDescription.textContent = updateDescription.value;
-    closePopup(popupEdit);
-    page.removeEventListener ('keydown', escHandler);
-  }
+  // слушатель для редактирования профиля
   
   editForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     editProfile();
   });
   
-  // код для добавления новой картинки с Местом
+  // слушатель для добавления новой картинки с Местом
   addForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     addMesto ();
   });
-  
 
-    
-    // колбек для закрытия попапов по esc
-    function escHandler(evt) {
-      const openedPopup = document.querySelector('.popup_opened');
-      if ((evt.key === 'Escape')&&(openedPopup)) {
-        closePopup(openedPopup);
-        }
-    }
    
   //слушатель для каждого попапа для закрытия по клику на оверлей
   
@@ -101,7 +79,7 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
         });
     })
   
-  // код для закрытия попапа редактирования аватара
+  // слушатель  для закрытия попапа редактирования аватара
   document.querySelector('.profile_avatar-button').addEventListener('click', () => {
     openPopup (editAvatar);
     page.addEventListener ('keydown', escHandler);
@@ -110,6 +88,3 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
       closePopup (editAvatar);
       page.removeEventListener ('keydown', escHandler);
     });
-  
-  
-  export { openPopup, closePopup, escHandler };
