@@ -1,18 +1,16 @@
 import './pages/index.css';
 
-// В проекте 2 папки blocks, я пыталась переместить и даже удалить ту, что не в src, но почему-то не получается
-
 // Импортируем данные
 import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './components/data.js';
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './components/utils.js';
   
   // Импортируем и запускаем валидацию
   import { removeErrorSpan, pickValidityMessage, showError, hideError, checkInputValidity, toggleButton, setEventListener, enableValidation} from './components/validation.js';  
     enableValidation(enableValidationConfig);
   
   //Импортируем создание карточек
-  import { createCard, addMesto } from './components/card-creation.js';
+  import { createCard, addMesto } from './components/card.js';
   
   //вызов функции создания новой карточки для рендера исходных картинок
   

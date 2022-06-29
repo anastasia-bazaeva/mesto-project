@@ -1,6 +1,6 @@
 import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './data.js';
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './utils.js';
     
 function openPopup (popup) {
     popup.classList.add('popup_opened');
@@ -18,8 +18,8 @@ function editProfile() {
   }  
 
 function escHandler(evt) {
-    const openedPopup = document.querySelector('.popup_opened');
-    if ((evt.key === 'Escape')&&(openedPopup)) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
       closePopup(openedPopup);
       }
   }

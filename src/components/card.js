@@ -1,6 +1,6 @@
 import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './data.js';
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './utils.js';
 
 import { openPopup, closePopup, editProfile, escHandler } from './modal.js';
 
