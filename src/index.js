@@ -1,28 +1,33 @@
 import './pages/index.css';
 
 // Импортируем данные
-import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
-    zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig } from './components/utils.js';
+import { initialCardsInRigthOrder, popupZoom,
+   popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
+    addForm,  page, anyPopup, enableValidationConfig } from './components/utils.js';
   
-  // Импортируем и запускаем валидацию
-  import { removeErrorSpan, pickValidityMessage, showError, hideError, checkInputValidity, toggleButton, setEventListener, enableValidation} from './components/validation.js';  
-    enableValidation(enableValidationConfig);
+  // Импортируем валидацию
+  import { removeErrorSpan, enableValidation} from './components/validation.js';  
   
   //Импортируем создание карточек
   import { createCard, addMesto } from './components/card.js';
+
+ // функции для открытия и закрытия попапов
+  import { openPopup, closePopup, editProfile, escHandler } from './components/modal.js';
   
-  //вызов функции создания новой карточки для рендера исходных картинок
-  
+  //запускаем валидацию
+  enableValidation(enableValidationConfig);
+
+//вызов функции создания новой карточки для рендера исходных картинок
   initialCardsInRigthOrder.forEach ((data) => {
     createCard(data);
   });
   
-  // функции для открытия и закрытия попапов
+ //Слушатель на открытый зум-попап
+  popupZoom.querySelector('.popup__button_status_zoom-close').addEventListener('click', () => {
+    closePopup(popupZoom);
+    page.removeEventListener ('keydown', escHandler);
+  })
 
-  import { openPopup, closePopup, editProfile, escHandler } from './components/modal.js';
-  
- 
   //слушатель для открытия и закрытия попапа редактирования профиля
   
   document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -78,11 +83,11 @@ import { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic,
     })
   
   // слушатель  для закрытия попапа редактирования аватара
-  document.querySelector('.profile_avatar-button').addEventListener('click', () => {
-    openPopup (editAvatar);
-    page.addEventListener ('keydown', escHandler);
-  });
-  editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
-      closePopup (editAvatar);
-      page.removeEventListener ('keydown', escHandler);
-    });
+  // document.querySelector('.profile__avatar-button').addEventListener('click', () => {
+  //   openPopup (editAvatar);
+  //   page.addEventListener ('keydown', escHandler);
+  // });
+  // editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
+  //     closePopup (editAvatar);
+  //     page.removeEventListener ('keydown', escHandler);
+  //   });

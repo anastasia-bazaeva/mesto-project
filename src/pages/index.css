@@ -39,8 +39,13 @@
 @import url(../blocks/popup/__zoom-pic/popup__zoom-pic.css);
 @import url(../blocks/mesto/__delete/mesto__delete.css);
 @import url(../blocks/mesto/_hidden/mesto_hidden.css);
+@import url(../blocks/popup/__button/_state/popup__button_state_inactive.css);
+@import url(../blocks/popup/__item/_state/popup__item_state_invalid.css);
+@import url(../blocks/popup/__item-error/popup__item-error.css);
 
-.profile_avatar-button {
+
+/* Эти стили пока не работают, т.к. кусок кода с редактированием профиля пока закомментирован */
+.profile__avatar-button {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -52,7 +57,7 @@
     border: none;
 }
 
-.profile_avatar-button:hover {
+.profile__avatar-button:hover {
     opacity: .8;
     background-image: url(../images/Vector_avatar.svg);
     background-position: center;
@@ -61,32 +66,8 @@
 }
 
 @media screen and (max-width: 650px) {
-    .profile_avatar-button {
+    .profile__avatar-button {
         margin: 0;
     }
 }
 
-.popup__button_state_inactive {
-    background-color: transparent;
-    color: rgba(0, 0, 0, .2);
-    border: 1px solid rgba(0, 0, 0, .2);
-
-}
-
-.popup__item-error {
-    display: block;
-    padding: 0;
-    margin: 0;
-    color: red;
-    margin-bottom: 11px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    height: 18px;
-}
-
-.popup__item_state_invalid {
-    border-bottom: 1px solid red;
-}

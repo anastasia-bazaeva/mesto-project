@@ -45,6 +45,8 @@ const initialCards = [
   const page = document.querySelector('.page');
   const anyPopup = Array.from(document.querySelectorAll('.popup'));
   const editAvatar = document.querySelector('.popup_edit_avatar');
+  const placeName = document.querySelector('.popup__item_el_place-name');
+  const placeUrl = document.querySelector('.popup__item_el_place-url');
   
   const enableValidationConfig = {
     formSelector: '.popup__container',
@@ -60,4 +62,4 @@ const initialCards = [
 
 export { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig };
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl };

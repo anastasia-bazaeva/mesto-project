@@ -12,7 +12,7 @@
        <main class="content">
            <section class="profile">
                <div class="profile__about">
-                <!-- <button class="profile_avatar-button" type="button"></button> Сделано по тренажеру, но закомментировала, т.к. это нужно только для следующей работы-->
+                <!-- <button class="profile__avatar-button" type="button"></button> Сделано по тренажеру, но закомментировала, т.к. это нужно только для следующей работы-->
                 <img class="profile__photo" src="<%=require('./images/profile-image.jpg')%>" alt="Фотография профиля">   
                  <div class="profile__info">
                     <div class="profile__user">
@@ -54,7 +54,7 @@
                 <span id="place-name-error" class="popup__item-error"></span>
                 <input class="popup__item popup__item_el_place-url popup__item_form_place-add" name="place-description" type="url" id="place-description" placeholder="Ссылка на место" required>
                 <span id="place-description-error" class="popup__item-error"></span>
-                <button class="popup__button popup__button_status_create popup__button_state_inactive" type="submit">Создать</button>
+                <button class="popup__button popup__button_status_create popup__button_state_inactive" type="submit" disabled>Создать</button>
             </fieldset>
         </form>
         <button class="popup__button popup__button_status_close" type="button"></button>
