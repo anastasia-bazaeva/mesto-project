@@ -14,7 +14,6 @@ function createCard (data) {
     mestoElement.querySelector('.mesto__title').textContent = data.name;
     mestoImage.src = data.link;
     mestoImage.alt = data.name;
-    renderCard (mestoContainer, mestoElement);
 
     //включение и закрытие попапа с увеличенной картинкой
 
@@ -36,6 +35,8 @@ function createCard (data) {
     mestoElement.querySelector('.mesto__button').addEventListener('click', function (evt) {
           evt.target.classList.toggle('mesto__button_active');
           });
+
+  return mestoElement;
   };
 
 //Функция для создания новой карточки по кноке
@@ -45,10 +46,11 @@ function addMesto() {
       link: placeUrl.value,
       name: placeName.value
       };
-      createCard(data);
+    const mestoElement = createCard(data);
+    renderCard (mestoContainer, mestoElement);
     placeUrl.value = '';
     placeName.value = ''; 
     closePopup (addPopup);
   }
 
-  export { createCard, addMesto };
+  export { createCard, addMesto, renderCard };
