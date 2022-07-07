@@ -3,25 +3,50 @@ import './pages/index.css';
 // Импортируем данные
 import { initialCardsInRigthOrder, mestoContainer, popupZoom,
    popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm, anyPopup, enableValidationConfig } from './components/utils.js';
+    addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar } from './components/utils.js';
   
   // Импортируем валидацию
   import { removeErrorSpan, enableValidation} from './components/validation.js';  
   
   //Импортируем создание карточек
-  import { createCard, addMesto, renderCard } from './components/card.js';
+  import { createCard, addMesto, renderCard, countLikes, mestoDelete } from './components/card.js';
 
  // функции для открытия и закрытия попапов
-  import { openPopup, closePopup, editProfile, } from './components/modal.js';
+  import { openPopup, closePopup, editProfile, editProfileAvatar, editProfilePic } from './components/modal.js';
+
+  import { apiConfig, getProfile, editProfileInfo, getAllCards, addCardToServer, removeCardFromServer, addLike, removeLike } from './components/api.js';
+
+  // about: "Sailor, researcher"
+  // avatar: "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg"
+  // cohort: "plus-cohort-13"
+  // name: "Jacques Cousteau"
+  // _id: "aff48aa652d182768eb1925e"
+
+  let profileID = null;
+//получаем данные профиля с сервера
+  getProfile()
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileDescription.textContent = data.about;
+    profileAvatar.src = data.avatar;
+    profileID = data._id;
+  })
+  .catch(err => console.log(`С данными профиля что-то не так: ${err}`))
+
+//рендерим все карточки на странице
+  getAllCards()
+  .then((serverCards) => {
+    serverCards.forEach ((data) => {
+      renderCard (mestoContainer, createCard(data));
+      // countLikes(createCard(data), data);
+      // mestoDelete(data, createCard(data));
+    })
+  })
+  .catch(err => console.log(`При рендере карточек что-то пошло не так: ${err}`))
   
   //запускаем валидацию
   enableValidation(enableValidationConfig);
 
-//вызов функции создания новой карточки для рендера исходных картинок
-  initialCardsInRigthOrder.forEach ((data) => {
-    const mestoElement = createCard(data); //Спасибо! Простите, что затупила, не сразу поняла, что должна была сделать Т__Т
-    renderCard (mestoContainer, mestoElement);
-  });
   
  //Слушатель на открытый зум-попап
   popupZoom.querySelector('.popup__button_status_zoom-close').addEventListener('click', () => {
@@ -69,7 +94,7 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
   //слушатель для каждого попапа для закрытия по клику на оверлей
   
     anyPopup.forEach(popup => { 
-      popup.addEventListener ('click', evt => {
+      popup.addEventListener ('mousedown', evt => {
         const openedPopup = document.querySelector('.popup_opened');
         if ((openedPopup)&&(evt.target.classList.contains('popup'))){ 
           closePopup(evt.target.closest('.popup_opened'));
@@ -77,10 +102,17 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
         });
     })
   
-  // слушатель  для закрытия попапа редактирования аватара
-  // document.querySelector('.profile__avatar-button').addEventListener('click', () => {
-  //   openPopup (editAvatar);
-  // });
-  // editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
-  //     closePopup (editAvatar);
-  //   });
+  //слушатель  для закрытия попапа редактирования аватара
+  document.querySelector('.profile__avatar-button').addEventListener('click', () => {
+    openPopup (editAvatar);
+  });
+  editAvatar.querySelector('.popup__button_status_close').addEventListener('click', () => {
+      closePopup (editAvatar);
+    });
+  // слушатель для кнопки редактирования аватара
+  editAvatar.querySelector('.popup_avatar_add').addEventListener('submit', evt => {
+    evt.preventDefault();
+    editProfileAvatar();
+  })
+
+  export { profileID }

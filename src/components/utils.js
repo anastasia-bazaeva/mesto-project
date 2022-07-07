@@ -36,6 +36,7 @@ const initialCards = [
   const popupEdit = document.querySelector('.popup_form_edit-profile');
   const popupAdd = document.querySelector('.popup_form_new-place');
   const editForm = document.querySelector('.popup_profile-edit');
+  const profileAvatar = document.querySelector('.profile__photo');
   const profileName = document.querySelector('.profile__name');
   const profileDescription = document.querySelector('.profile__description');
   const updateName = document.querySelector('#name');
@@ -45,6 +46,7 @@ const initialCards = [
   const page = document.querySelector('.page');
   const anyPopup = Array.from(document.querySelectorAll('.popup'));
   const editAvatar = document.querySelector('.popup_edit_avatar');
+  const updateAvatarPic = document.querySelector('#avatar-url');
   const placeName = document.querySelector('.popup__item_el_place-name');
   const placeUrl = document.querySelector('.popup__item_el_place-url');
   
@@ -62,4 +64,4 @@ const initialCards = [
 
 export { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl };
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic };

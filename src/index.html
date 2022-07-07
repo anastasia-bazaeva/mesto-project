@@ -12,14 +12,14 @@
        <main class="content">
            <section class="profile">
                <div class="profile__about">
-                <!-- <button class="profile__avatar-button" type="button"></button> Сделано по тренажеру, но закомментировала, т.к. это нужно только для следующей работы-->
-                <img class="profile__photo" src="<%=require('./images/profile-image.jpg')%>" alt="Фотография профиля">   
+                <button class="profile__avatar-button" type="button"></button>
+                <img class="profile__photo" src="" alt="Фотография профиля">   
                  <div class="profile__info">
                     <div class="profile__user">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="profile__edit-button" type="button"></button>
                     </div>
-                    <p class="profile__description">Исследователь океана</p>
+                    <p class="profile__description"></p>
                   </div>
                 </div>
                 <button class="profile__add-button" type="button"></button>
@@ -86,7 +86,10 @@
             <img class="mesto__image" src="" alt="">
             <div class="mesto__info">
                <h2 class="mesto__title"></h2>
-               <button class="mesto__button" type="button"></button>
+               <div class="mesto__like-info">
+                <button class="mesto__button" type="button"></button>
+               <h2 class="mesto__likes">0</h2>
+               </div>
               </div>
        </div>
     </template>
