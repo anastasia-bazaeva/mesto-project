@@ -35,8 +35,10 @@ function editProfile() {
           .then((data) => {
             profileAvatar.src = data.avatar;
           })
+          .catch(err => console.log(`При получении обновленных данных профиля что-то пошло не так: ${err}`))
         closePopup(editAvatar)
       })
+      .catch(err => console.log(`При редактировании аватара профиля что-то пошло не так: ${err}`))
       .finally(() => renderLoading(avatarButton, false, 'Сохранить'))
     }  
 
