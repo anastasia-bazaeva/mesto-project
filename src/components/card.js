@@ -1,4 +1,4 @@
-import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, placeUrl, addForm } from './utils.js';
+import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, placeUrl, addForm, mestoCards } from './utils.js';
 
 import { openPopup, closePopup, renderLoading } from './modal.js';
 
@@ -33,7 +33,6 @@ function renderCard (container, card) {
 }
 
 function createCard (data) { 
-    const mestoCards = document.querySelector('#new-mesto').content;
     const mestoElement = mestoCards.querySelector('.mesto').cloneNode(true);
     const mestoImage = mestoElement.querySelector('.mesto__image');
     const likeButton = mestoElement.querySelector('.mesto__button');
@@ -87,12 +86,12 @@ function addMesto() {
     addCardToServer(data)
     .then((data) => {
       renderCard (mestoContainer, createCard(data));
+      closePopup (addPopup); 
     })
-      .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
-    renderLoading(addButton, false, 'Создать');
+    .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
+    .finally(() => renderLoading(addButton, false, 'Создать'))
     placeUrl.value = '';
     placeName.value = ''; 
-    closePopup (addPopup); 
   }
 
   export { createCard, addMesto, renderCard, countLikes, mestoDelete };

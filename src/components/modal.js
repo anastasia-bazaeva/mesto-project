@@ -20,10 +20,11 @@ function editProfile() {
         .then((data) => {
         profileName.textContent = data.name;
         profileDescription.textContent = data.about;
+        closePopup(popupEdit);
   })
     })
-    renderLoading(profileUpdateButton, false, 'Сохранить');
-    closePopup(popupEdit);
+    .catch(err => console.log(`При редактировании профиля что-то пошло не так: ${err}`))
+    .finally(() => renderLoading(profileUpdateButton, false, 'Сохранить'))
   }  
 
   function editProfileAvatar() {
@@ -33,10 +34,10 @@ function editProfile() {
         getProfile()
           .then((data) => {
             profileAvatar.src = data.avatar;
-    })
+          })
+        closePopup(editAvatar)
       })
-      renderLoading(avatarButton, false, 'Сохранить');
-      closePopup(editAvatar);
+      .finally(() => renderLoading(avatarButton, false, 'Сохранить'))
     }  
 
 function escHandler(evt) {

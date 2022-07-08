@@ -42,45 +42,10 @@
 @import url(../blocks/popup/__button/_state/popup__button_state_inactive.css);
 @import url(../blocks/popup/__item/_state/popup__item_state_invalid.css);
 @import url(../blocks/popup/__item-error/popup__item-error.css);
+@import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
+@import url(../blocks/mesto/__like-info/mesto__like-info.css);
+@import url(../blocks/mesto/__likes/mesto__likes.css);
+@import url(../blocks/spinner/spinner.css);
+@import url(../blocks/spinner/_main-content/spinner_main-content.css);
+@import url(../blocks/spinner/spinner_visible.css);
 
-
-/* Эти стили пока не работают, т.к. кусок кода с редактированием профиля пока закомментирован */
-.profile__avatar-button {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 0 12px 0 0;
-    padding: 0;
-    background-color: #000000;
-    opacity: 0;
-    position: absolute;
-    border: none;
-}
-
-.profile__avatar-button:hover {
-    opacity: .8;
-    background-image: url(../images/Vector_avatar.svg);
-    background-position: center;
-    background-size: 26px;
-    background-repeat: no-repeat;
-}
-
-@media screen and (max-width: 650px) {
-    .profile__avatar-button {
-        margin: 0;
-    }
-}
-.mesto__like-info {
-    display: flex;
-    flex-direction: column;
-    row-gap: 3px;
-}
-.mesto__likes {
-    margin: 0;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    text-align: center;
-}

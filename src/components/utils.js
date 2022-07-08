@@ -49,6 +49,8 @@ const initialCards = [
   const updateAvatarPic = document.querySelector('#avatar-url');
   const placeName = document.querySelector('.popup__item_el_place-name');
   const placeUrl = document.querySelector('.popup__item_el_place-url');
+  const mestoCards = document.querySelector('#new-mesto').content;
+  const spinners = Array.from(document.querySelectorAll('.spinner'));
   
   const enableValidationConfig = {
     formSelector: '.popup__container',
@@ -64,4 +66,4 @@ const initialCards = [
 
 export { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic };
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic, mestoCards, spinners };

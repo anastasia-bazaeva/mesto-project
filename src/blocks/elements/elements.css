@@ -7,6 +7,7 @@
     row-gap: 20px;
     padding: 50px 0 66px;
     justify-content: center;
+    position: relative;
 }
 
 @media screen and (max-width: 650px) {
