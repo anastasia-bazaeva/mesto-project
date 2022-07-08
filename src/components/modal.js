@@ -1,5 +1,5 @@
 import { popupEdit, profileName, profileDescription, updateName, updateDescription,
-     page, updateAvatarPic, editAvatar, profileAvatar } from './utils.js';
+     page, updateAvatarPic, editAvatar, profileAvatar, editForm } from './utils.js';
 import { getProfile, editProfileInfo, editProfilePic } from './api.js';
     
 function openPopup (popup) {
@@ -13,6 +13,7 @@ function closePopup (popup) {
   }
 
 function editProfile() {
+  const profileUpdateButton = editForm.querySelector('.popup__button_status_save');
   editProfileInfo({name: updateName.value, about: updateDescription.value})
     .then(() => {
       getProfile()
@@ -21,10 +22,12 @@ function editProfile() {
         profileDescription.textContent = data.about;
   })
     })
+    renderLoading(profileUpdateButton, false, 'Сохранить');
     closePopup(popupEdit);
   }  
 
   function editProfileAvatar() {
+    const avatarButton = editAvatar.querySelector('.popup__button_status_save');
     editProfilePic({avatar: updateAvatarPic.value})
       .then(() => {
         getProfile()
@@ -32,6 +35,7 @@ function editProfile() {
             profileAvatar.src = data.avatar;
     })
       })
+      renderLoading(avatarButton, false, 'Сохранить');
       closePopup(editAvatar);
     }  
 
@@ -41,5 +45,12 @@ function escHandler(evt) {
       closePopup(openedPopup);
       }
   }
+function renderLoading (button, state, text) {
+  if (state) {
+    button.textContent = "Сохранение..."
+  } else {
+    button.textContent = text;
+  }
+}
 
-export { openPopup, closePopup, editProfile, editProfileAvatar, escHandler };
+export { openPopup, closePopup, editProfile, editProfileAvatar, escHandler, renderLoading };

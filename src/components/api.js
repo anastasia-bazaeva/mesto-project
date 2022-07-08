@@ -1,5 +1,6 @@
 const apiConfig = {
     url: "https://mesto.nomoreparties.co/plus-cohort-13",
+    urlLikes: "https://nomoreparties.co/v1/plus-cohort-13/cards/likes",
     headers: {
         "Content-Type": "application/json",
         "Authorization": "5f5f6516-2c69-4593-ad66-9a5c627fc536"
@@ -60,21 +61,13 @@ function removeCardFromServer (dataId) {
     .then(onResponse)
 }
 
-function addLike (dataId, data) {
-    return fetch(`${apiConfig.url}/card/likes/${dataId}`, {
-        method: 'PUT',
-        headers: apiConfig.headers,
-        body: JSON.stringify(data)
-    })
-    .then(onResponse)
-}
-
-function removeLike (dataId) {
-    return fetch(`${apiConfig.url}/card/likes/${dataId}`, {
-        method: 'DELETE',
+function changeLikeButton (dataId, isLiked) {
+    return fetch(`${apiConfig.urlLikes}/${dataId}`, {
+        method: isLiked ? 'DELETE' : 'PUT',
         headers: apiConfig.headers,
     })
     .then(onResponse)
 }
 
-export { apiConfig, getProfile, editProfileInfo, editProfilePic, getAllCards, addCardToServer, removeCardFromServer, addLike, removeLike };
+
+export { apiConfig, getProfile, editProfileInfo, editProfilePic, getAllCards, addCardToServer, removeCardFromServer, changeLikeButton };

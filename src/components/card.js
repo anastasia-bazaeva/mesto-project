@@ -1,16 +1,32 @@
-import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, placeUrl, profileName,
-  profileDescription, profileAvatar } from './utils.js';
+import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, placeUrl, addForm } from './utils.js';
 
-import { openPopup, closePopup } from './modal.js';
+import { openPopup, closePopup, renderLoading } from './modal.js';
 
-import { addCardToServer, removeCardFromServer, getAllCards, addLike, removeLike } from './api.js';
+import { addCardToServer, removeCardFromServer, changeLikeButton } from './api.js';
 
 import { profileID } from '../index.js';
 
-function countLikes (mestoElement, card) {
+function countLikes (mestoElement, likesArray) {
+  const likeButton = mestoElement.querySelector('.mesto__button');
   const likesCounter = mestoElement.querySelector('.mesto__likes');
-  likesCounter.textContent = card.likes.length;
+  likesCounter.textContent = likesArray.length;
+  if (isLiked(likesArray)) {
+    likeButton.classList.add('mesto__button_active');
+  } else {
+    likeButton.classList.remove('mesto__button_active');
+  }
 }
+
+function isLiked(likesArray) {
+  return Boolean(likesArray.find((likeObj) => likeObj._id === profileID))
+}
+
+function likeStatusHandler (cardId, isLiked, mestoElement) {
+  changeLikeButton(cardId, isLiked)
+  .then((data) => countLikes(mestoElement, data.likes))
+  .catch(err => console.log(`При установке лайка произошла ошибка: ${err}`))
+}
+
 
 function renderCard (container, card) {
   container.prepend(card);
@@ -20,11 +36,12 @@ function createCard (data) {
     const mestoCards = document.querySelector('#new-mesto').content;
     const mestoElement = mestoCards.querySelector('.mesto').cloneNode(true);
     const mestoImage = mestoElement.querySelector('.mesto__image');
+    const likeButton = mestoElement.querySelector('.mesto__button');
 
     mestoElement.querySelector('.mesto__title').textContent = data.name;
     mestoImage.src = data.link;
     mestoImage.alt = data.name;
-    countLikes(mestoElement, data);
+    countLikes(mestoElement, data.likes);
 
     //включение и закрытие попапа с увеличенной картинкой
     mestoImage.addEventListener('click', () => {
@@ -34,37 +51,15 @@ function createCard (data) {
           zoomPic.alt = data.name;
         })
 
-    //удаление карточки
-    mestoDelete(data, mestoElement);
-
     //установка и снятие лайков
-    like (mestoElement, data);
-    // mestoElement.querySelector('.mesto__button').addEventListener('click', function (evt) {
-    //       evt.target.classList.toggle('mesto__button_active');
-    //       });
+    likeButton.addEventListener('click', () => {
+      likeStatusHandler (data._id, likeButton.classList.contains('mesto__button_active'), mestoElement);
+          });
+  //удаление карточки
+  mestoDelete(data, mestoElement);
 
   return mestoElement;
   };
-
-//функция установки и снятия лайка
-function like (mestoElement, data) {
-  mestoElement.querySelector('.mesto__button').addEventListener('click', function (evt) {
-    console.log(data.likes);
-    if (!(data.likes._id.some(profileID))) {
-      const likeInfo = {likes: profileID};
-      console.log(likeInfo);
-      evt.target.classList.add('mesto__button_active');
-      addLike(data._id, likeInfo)
-      .then(res => countLikes(mestoElement, res))
-      .catch(err => console.log(`Не получается поставить лайк: ${err}`))
-    } else {
-      evt.target.classList.remove('mesto__button_active');
-      removeLike(data._id)
-      .then(res => countLikes(mestoElement, res))
-      .catch(err => console.log(`Не получается снять лайк: ${err}`))
-    }
-    });
-}
 
 
 //функция удаления карточки
@@ -84,23 +79,20 @@ function mestoDelete (data, mestoElement) {
 
 //Функция для создания новой карточки по кноке
 function addMesto() {
+  const addButton = addForm.querySelector('.popup__button_status_create');
     const data = {
       link: placeUrl.value,
       name: placeName.value,
       };
     addCardToServer(data)
-    .then(() => {
-        return getAllCards ()
-        .then((serverCards) => {
-          serverCards.forEach ((data) => {
-            renderCard (mestoContainer, createCard(data));
-          })
-        })
-      .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
+    .then((data) => {
+      renderCard (mestoContainer, createCard(data));
     })
-      placeUrl.value = '';
-      placeName.value = ''; 
-      closePopup (addPopup); 
+      .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
+    renderLoading(addButton, false, 'Создать');
+    placeUrl.value = '';
+    placeName.value = ''; 
+    closePopup (addPopup); 
   }
 
   export { createCard, addMesto, renderCard, countLikes, mestoDelete };

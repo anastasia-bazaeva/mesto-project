@@ -1,7 +1,7 @@
 import './pages/index.css';
 
 // Импортируем данные
-import { initialCardsInRigthOrder, mestoContainer, popupZoom,
+import { mestoContainer, popupZoom,
    popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
     addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar } from './components/utils.js';
   
@@ -9,12 +9,12 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
   import { removeErrorSpan, enableValidation} from './components/validation.js';  
   
   //Импортируем создание карточек
-  import { createCard, addMesto, renderCard, countLikes, mestoDelete } from './components/card.js';
+  import { createCard, addMesto, renderCard, } from './components/card.js';
 
  // функции для открытия и закрытия попапов
-  import { openPopup, closePopup, editProfile, editProfileAvatar, editProfilePic } from './components/modal.js';
+  import { openPopup, closePopup, editProfile, editProfileAvatar, renderLoading } from './components/modal.js';
 
-  import { apiConfig, getProfile, editProfileInfo, getAllCards, addCardToServer, removeCardFromServer, addLike, removeLike } from './components/api.js';
+  import { getProfile, getAllCards } from './components/api.js';
 
   // about: "Sailor, researcher"
   // avatar: "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg"
@@ -38,8 +38,6 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
   .then((serverCards) => {
     serverCards.forEach ((data) => {
       renderCard (mestoContainer, createCard(data));
-      // countLikes(createCard(data), data);
-      // mestoDelete(data, createCard(data));
     })
   })
   .catch(err => console.log(`При рендере карточек что-то пошло не так: ${err}`))
@@ -80,14 +78,18 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
   // слушатель для редактирования профиля
   
   editForm.addEventListener('submit', function (evt) {
+    const profileUpdateButton = editForm.querySelector('.popup__button_status_save');
     evt.preventDefault();
+    renderLoading(profileUpdateButton, true, '');
     editProfile();
   });
   
   // слушатель для добавления новой картинки с Местом
   addForm.addEventListener('submit', function (evt) {
+    const addButton = addForm.querySelector('.popup__button_status_create');
     evt.preventDefault();
-    addMesto ();
+    renderLoading(addButton, true, '');
+    addMesto (); 
   });
 
    
@@ -111,7 +113,9 @@ import { initialCardsInRigthOrder, mestoContainer, popupZoom,
     });
   // слушатель для кнопки редактирования аватара
   editAvatar.querySelector('.popup_avatar_add').addEventListener('submit', evt => {
+    const avatarButton = editAvatar.querySelector('.popup__button_status_save');
     evt.preventDefault();
+    renderLoading(avatarButton, true, '');
     editProfileAvatar();
   })
 
