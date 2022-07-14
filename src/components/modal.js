@@ -1,6 +1,7 @@
 import { popupEdit, profileName, profileDescription, updateName, updateDescription,
      page, updateAvatarPic, editAvatar, profileAvatar, editForm } from './utils.js';
-import { getProfile, editProfileInfo, editProfilePic } from './api.js';
+// import { getProfile, editProfileInfo, editProfilePic } from './api.js';
+import { apiConfig, Api } from './api.js'; 
     
 function openPopup (popup) {
     popup.classList.add('popup_opened');
@@ -14,9 +15,9 @@ function closePopup (popup) {
 
 function editProfile() {
   const profileUpdateButton = editForm.querySelector('.popup__button_status_save');
-  editProfileInfo({name: updateName.value, about: updateDescription.value})
+  apiConfig.editProfileInfo({name: updateName.value, about: updateDescription.value})
     .then(() => {
-      getProfile()
+      apiConfig.getProfile()
         .then((data) => {
         profileName.textContent = data.name;
         profileDescription.textContent = data.about;
@@ -29,7 +30,7 @@ function editProfile() {
 
   function editProfileAvatar() {
     const avatarButton = editAvatar.querySelector('.popup__button_status_save');
-    editProfilePic({avatar: updateAvatarPic.value})
+    apiConfig.editProfilePic({avatar: updateAvatarPic.value})
       .then(() => {
         getProfile()
           .then((data) => {

@@ -14,7 +14,9 @@ import { mestoContainer, popupZoom,
  // функции для открытия и закрытия попапов
   import { openPopup, closePopup, editProfile, editProfileAvatar, renderLoading } from './components/modal.js';
 
-  import { getProfile, getAllCards } from './components/api.js';
+  // import { getProfile, getAllCards } from './components/api.js';
+
+  import { apiConfig, Api } from './components/api.js'; 
 
   let profileID = null;
 
@@ -29,10 +31,10 @@ function renderLoadingMainContent (isLoading) {
     })
   }
 }
+renderLoadingMainContent(true);
 
 //получаем данные профиля и картинки с сервера
-renderLoadingMainContent(true);
-  Promise.all([getProfile(), getAllCards()])
+  Promise.all([apiConfig.getProfile(), apiConfig.getAllCards()])
   .then((data) => {
     profileName.textContent = data[0].name;
     profileDescription.textContent = data[0].about;

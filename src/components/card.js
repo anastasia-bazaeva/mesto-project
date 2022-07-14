@@ -2,7 +2,9 @@ import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, plac
 
 import { openPopup, closePopup, renderLoading } from './modal.js';
 
-import { addCardToServer, removeCardFromServer, changeLikeButton } from './api.js';
+// import { addCardToServer, removeCardFromServer, changeLikeButton } from './api.js';
+
+import { apiConfig, Api } from './api.js'; 
 
 import { profileID } from '../index.js';
 
@@ -22,7 +24,7 @@ function isLiked(likesArray) {
 }
 
 function likeStatusHandler (cardId, isLiked, mestoElement) {
-  changeLikeButton(cardId, isLiked)
+  apiConfig.changeLikeButton(cardId, isLiked)
   .then((data) => countLikes(mestoElement, data.likes))
   .catch(err => console.log(`При установке лайка произошла ошибка: ${err}`))
 }
@@ -54,8 +56,8 @@ function createCard (data) {
     likeButton.addEventListener('click', () => {
       likeStatusHandler (data._id, likeButton.classList.contains('mesto__button_active'), mestoElement);
           });
-  //удаление карточки
-  mestoDelete(data, mestoElement);
+    //удаление карточки
+    mestoDelete(data, mestoElement);
 
   return mestoElement;
   };
@@ -69,7 +71,7 @@ function mestoDelete (data, mestoElement) {
   } else {
     mestoElement.querySelector('.mesto__delete').addEventListener('click', () => {
       const removeData = `"_id": "${data._id}"`
-      removeCardFromServer (data._id, removeData)
+      apiConfig.removeCardFromServer (data._id, removeData)
       .then(() => mestoElement.remove())
       .catch(err => console.log(`При удалении карточки что-то пошло не так: ${err}`))
     })
@@ -83,7 +85,7 @@ function addMesto() {
       link: placeUrl.value,
       name: placeName.value,
       };
-    addCardToServer(data)
+    apiConfig.addCardToServer(data)
     .then((data) => {
       renderCard (mestoContainer, createCard(data));
       closePopup (addPopup); 
