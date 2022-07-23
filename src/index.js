@@ -3,10 +3,10 @@ import './pages/index.css';
 // Импортируем данные
 import { mestoContainer, popupZoom,
    popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar, spinners } from './components/utils.js';
+    addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar, spinners, forms } from './components/utils.js';
   
   // Импортируем валидацию
-  import { removeErrorSpan, enableValidation} from './components/validation.js';  
+  import { removeErrorSpan, FormValidator } from './components/validation.js';  
   
   //Импортируем создание карточек
   import { createCard, addMesto, renderCard, } from './components/card.js';
@@ -49,7 +49,12 @@ renderLoadingMainContent(true);
   .finally(() => renderLoadingMainContent(false))
   
   //запускаем валидацию
-  enableValidation(enableValidationConfig);
+  // enableValidation(enableValidationConfig);
+  forms.forEach((form) => {
+    const formClass = new FormValidator (enableValidationConfig, form);
+    formClass.enableValidation();
+  })
+
 
   //слушатель для открытия попапа редактирования профиля
   document.querySelector('.profile__edit-button').addEventListener('click', () => {
