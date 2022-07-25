@@ -52,7 +52,7 @@ const initialCards = [
   const mestoCards = document.querySelector('#new-mesto').content;
   const spinners = Array.from(document.querySelectorAll('.spinner'));
   const forms = Array.from(document.querySelectorAll('.popup__container'));
-  
+
   const enableValidationConfig = {
     formSelector: '.popup__container',
     inputSelector: '.popup__item',

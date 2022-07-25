@@ -14,41 +14,41 @@
 
 class FormValidator {
   constructor (config, formElement){
-    this.formElement = formElement;
+    this._formElement = formElement;
 
-    this.formSelector = config.formSelector;
-    this.inputSelector = config.inputSelector;
-    this.submitButtonSelector = config.submitButtonSelector;
-    this.inactiveButtonClass = config.inactiveButtonClass;
-    this.inputErrorClass = config.inputErrorClass;
-    this.customMessages = config.customMessages;
-    this.errorSpanClass = config.errorSpanClass;
+    this._formSelector = config.formSelector;
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._customMessages = config.customMessages;
+    this._errorSpanClass = config.errorSpanClass;
 
-    this.inputList = Array.from(this.formElement.querySelectorAll(this.inputSelector));
-    this.submitButton = this.formElement.querySelector(this.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
   }
   _pickValidityMessage (inputElement) {
         if (((inputElement.type !== 'url')&&(!inputElement.validity.valueMissing))||(inputElement.validity.valid)) {
           return;
         } else if (inputElement.validity.valueMissing) {
-          inputElement.setCustomValidity(this.customMessages.missedInput);
+          inputElement.setCustomValidity(this._customMessages.missedInput);
         } else {
-          inputElement.setCustomValidity(this.customMessages.urlMismatch);
+          inputElement.setCustomValidity(this._customMessages.urlMismatch);
         }
   }
   _showError (errorElement, inputElement) {
-    inputElement.classList.add(this.inputErrorClass);
+    inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
   }
   
   _hideError (errorElement, inputElement) {
-    inputElement.classList.remove(this.inputErrorClass);
+    inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
   }
   _checkInputValidity (inputElement) {
     inputElement.setCustomValidity('');
     const isInputValid = inputElement.validity.valid;
-    const errorElement = this.formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     this._pickValidityMessage (inputElement);
     if(!isInputValid) {
       this._showError(errorElement, inputElement);
@@ -59,24 +59,24 @@ class FormValidator {
 
   _toggleButton (button, isActive = false) {
     if(isActive) {
-      button.classList.remove(this.inactiveButtonClass);
+      button.classList.remove(this._inactiveButtonClass);
       button.disabled = false;
     } else {
-      button.classList.add(this.inactiveButtonClass);
+      button.classList.add(this._inactiveButtonClass);
       button.disabled = 'disabled';
     }
   }
 
   _setEventListener () {    
-    this.inputList.forEach((input) => {
+    this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._toggleButton(this.submitButton, this.formElement.checkValidity());
+        this._toggleButton(this._submitButton, this._formElement.checkValidity());
       })
     });
-    this.formElement.addEventListener('submit',(evt)=> {
+    this._formElement.addEventListener('submit',(evt)=> {
         evt.preventDefault();
-        this._toggleButton(this.submitButton, false);
+        this._toggleButton(this._submitButton, false);
       });
   }
   // _removeErrorSpan() {

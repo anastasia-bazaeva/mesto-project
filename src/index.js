@@ -1,22 +1,23 @@
 import './pages/index.css';
 
 // Импортируем данные
-import { mestoContainer, popupZoom,
+import { mestoContainer, popupZoom, mestoCards, addPopup,
    popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar, spinners, forms } from './components/utils.js';
+    addForm, anyPopup, enableValidationConfig, editAvatar, profileAvatar, spinners, forms, placeName, placeUrl } from './components/utils.js';
   
   // Импортируем валидацию
   import { removeErrorSpan, FormValidator } from './components/validation.js';  
   
   //Импортируем создание карточек
-  import { createCard, addMesto, renderCard, } from './components/card.js';
+  import { Card } from './components/card.js';
 
  // функции для открытия и закрытия попапов
   import { openPopup, closePopup, editProfile, editProfileAvatar, renderLoading } from './components/modal.js';
 
   // import { getProfile, getAllCards } from './components/api.js';
 
-  import { apiConfig, Api } from './components/api.js'; 
+  import { apiConfig } from './components/api.js'; 
+  import { Section } from './components/Section.js';
 
   let profileID = null;
 
@@ -33,17 +34,37 @@ function renderLoadingMainContent (isLoading) {
 }
 renderLoadingMainContent(true);
 
+//функция создания карточки
+
+function cardCreation(data, profileID) {
+  const card = new Card(
+    {
+      cardInfo: data,
+      handleCardClick: (place, link) => {
+        imagePopup.open(link, place); //пока класса нет, и это не работает
+      },
+    },
+    apiConfig,
+    mestoCards,
+    profileID
+  );
+  return card.getCard();
+}
+
+  const serverCards = new Section ({
+  renderer: (item) => {
+    serverCards.addItem(cardCreation(item, profileID));
+}},
+mestoContainer);
+
 //получаем данные профиля и картинки с сервера
   Promise.all([apiConfig.getProfile(), apiConfig.getAllCards()])
-  .then((data) => {
-    profileName.textContent = data[0].name;
-    profileDescription.textContent = data[0].about;
-    profileAvatar.src = data[0].avatar;
-    profileID = data[0]._id;
-    const serverCards = data[1];
-    serverCards.forEach ((serverCards) => {
-      renderCard (mestoContainer, createCard(serverCards))
-    })
+  .then(([profileData, cardsData]) => {
+    profileName.textContent = profileData.name;
+    profileDescription.textContent = profileData.about;
+    profileAvatar.src = profileData.avatar;
+    profileID = profileData._id;
+    serverCards.renderItems(cardsData);
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
   .finally(() => renderLoadingMainContent(false))
@@ -55,6 +76,23 @@ renderLoadingMainContent(true);
     formClass.enableValidation();
   })
 
+  //Функция для создания новой карточки по кноке
+function addMesto() {
+  const addButton = addForm.querySelector('.popup__button_status_create');
+    const data = {
+      link: placeUrl.value,
+      name: placeName.value,
+      };
+    apiConfig.addCardToServer(data)
+    .then((data) => {
+      serverCards.addItem(cardCreation(data, profileID));
+      closePopup (addPopup); 
+    })
+    .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
+    .finally(() => renderLoading(addButton, false, 'Создать'))
+    placeUrl.value = '';
+    placeName.value = ''; 
+  }
 
   //слушатель для открытия попапа редактирования профиля
   document.querySelector('.profile__edit-button').addEventListener('click', () => {

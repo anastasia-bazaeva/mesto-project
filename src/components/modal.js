@@ -32,15 +32,18 @@ function editProfile() {
     const avatarButton = editAvatar.querySelector('.popup__button_status_save');
     apiConfig.editProfilePic({avatar: updateAvatarPic.value})
       .then(() => {
-        getProfile()
+        apiConfig.getProfile()
           .then((data) => {
             profileAvatar.src = data.avatar;
           })
           .catch(err => console.log(`При получении обновленных данных профиля что-то пошло не так: ${err}`))
-        closePopup(editAvatar)
+        closePopup(editAvatar);
+        //переписать очистку поля, почему-то не работает
+        // const avatarField = editAvatar.querySelector('.popup__item_form_avatar-add');
+        // avatarField.textContent = '';
       })
       .catch(err => console.log(`При редактировании аватара профиля что-то пошло не так: ${err}`))
-      .finally(() => renderLoading(avatarButton, false, 'Сохранить'))
+      .finally(() => renderLoading(avatarButton, false, 'Сохранить'));
     }  
 
 function escHandler(evt) {

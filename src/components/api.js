@@ -5,7 +5,7 @@ class Api {
         this._urlLikes = options.urlLikes;
         this._headers = options.headers;
     }
-    onResponse = (res) => {
+    checkResponse = (res) => {
         return res.ok ? res.json() : Promise.reject(res)
     }
     
@@ -13,7 +13,7 @@ class Api {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(this.onResponse)  
+        .then(this.checkResponse)  
     }
     
     editProfileInfo (data) {
@@ -22,7 +22,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
     
     editProfilePic (data) {
@@ -31,7 +31,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
     
     
@@ -39,7 +39,7 @@ class Api {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
     
     addCardToServer (data) {
@@ -48,7 +48,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
     
     removeCardFromServer (dataId) {
@@ -56,7 +56,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers,
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
     
     changeLikeButton (dataId, isLiked) {
@@ -64,7 +64,7 @@ class Api {
             method: isLiked ? 'DELETE' : 'PUT',
             headers: this._headers,
         })
-        .then(this.onResponse)
+        .then(this.checkResponse)
     }
 }
 const apiConfig = new Api ({
