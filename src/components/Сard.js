@@ -1,15 +1,3 @@
-import { mestoContainer, popupZoom, zoomPic, zoomName, addPopup, placeName, placeUrl, addForm, mestoCards } from './utils.js';
-
-import { openPopup, closePopup, renderLoading } from './modal.js';
-
-// import { addCardToServer, removeCardFromServer, changeLikeButton } from './api.js';
-
-import { apiConfig } from './api.js'; 
-
-import { profileID } from '../index.js';
-
-// NewCard({cardInfo, handleCardClick}, apiConfig, mestoCards)
-
 export class Card {
   constructor({cardInfo, handleCardClick}, api, cardSelector, profileID) {
     this._place = cardInfo.name;
@@ -109,7 +97,7 @@ export class Card {
 
   _setZoomListener() {
     this._cardImage.addEventListener('click', () => {
-      this._openZoomPop(this._place, this._imgLink);
+      this._openZoomPop(this._imgLink, this._place);
     })
   }
 }

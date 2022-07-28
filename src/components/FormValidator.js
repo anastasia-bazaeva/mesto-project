@@ -1,18 +1,4 @@
-// const enableValidationConfig = {
-//   formSelector: '.popup__container',
-//   inputSelector: '.popup__item',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_state_inactive',
-//   inputErrorClass: 'popup__item_state_invalid',
-//   errorSpanClass: '.popup__item-error',
-//   customMessages: {
-//     urlMismatch: 'Введите адрес сайта',
-//     missedInput: 'Вы пропустили это поле',
-//   },
-// }; 
-
-
-class FormValidator {
+export class FormValidator {
   constructor (config, formElement){
     this._formElement = formElement;
 
@@ -79,25 +65,12 @@ class FormValidator {
         this._toggleButton(this._submitButton, false);
       });
   }
-  // _removeErrorSpan() {
-  //   const errorSpan = Array.from(this.formElement.querySelectorAll(this.errorSpanClass));
-  //   errorSpan.forEach(span => {
-  //     span.textContent = '';
-  //   });
-  // }
 
  enableValidation() {
     this._setEventListener();
   }
 
 }
-
-const removeErrorSpan = (popup) => {
-    const errorSpan = Array.from(popup.querySelectorAll('.popup__item-error'));
-    errorSpan.forEach(span => {
-      span.textContent = '';
-    });
-  }
 
 // const pickValidityMessage = (inputElement, config) => {
 //     if (((inputElement.type !== 'url')&&(!inputElement.validity.valueMissing))||(inputElement.validity.valid)) {
@@ -170,4 +143,3 @@ const removeErrorSpan = (popup) => {
 //   }
   
 // export { removeErrorSpan, pickValidityMessage, showError, hideError, checkInputValidity, toggleButton, setEventListener, enableValidation};   
-export { FormValidator, removeErrorSpan }
