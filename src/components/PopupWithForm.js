@@ -12,7 +12,7 @@ export class PopupWithForm extends Popup {
 
     openPopup() {
         super.openPopup();
-        this.setEventListeners();
+        this._setEventListeners();
     }
 
     closePopup() {
@@ -26,7 +26,7 @@ export class PopupWithForm extends Popup {
         return this._inputValues;
     }
 
-    setEventListeners() {
+    _setEventListeners() {
         super.setCloseEventListeners();
         this._form.addEventListener('submit', evt => {
             evt.preventDefault();

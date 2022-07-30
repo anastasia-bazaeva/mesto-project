@@ -11,7 +11,7 @@ export class PopupWithImage extends Popup {
       super.openPopup();
       this._popupImage.src = link;
       this._popupText.textContent = place;
-      this.setEventListeners();
+      this._setEventListeners();
     }
 
     closePopup() {
@@ -21,7 +21,7 @@ export class PopupWithImage extends Popup {
       console.log(this._popup)
     }
 
-    setEventListeners(){
+    _setEventListeners(){
       super.setCloseEventListeners();
     }
   }
