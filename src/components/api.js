@@ -1,4 +1,5 @@
-//пытаемся отобразить название файла с большой буквы через команду git config --global core.ignorecase false
+//пытались отобразить название файла с большой буквы через команду git config --global core.ignorecase false
+// не получилось, пришлось создать еще один файл
 
 export class Api {
     constructor (options) {
