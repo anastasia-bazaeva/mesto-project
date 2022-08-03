@@ -7,31 +7,27 @@ export class PopupWithForm extends Popup {
         this._onSubmit = submitCallback;
         this._inputList = this._form.querySelectorAll('.popup__item');
         this._popupButton = this._form.querySelector('.popup__button_status_save');
-        this._inputValues = [];
-    }
-
-    openPopup() {
-        super.openPopup();
-        this._setEventListeners();
+        this._inputValues = {};
     }
 
     closePopup() {
+        this._form.reset();
         super.closePopup();
     }
 
     _getInputValues() {
-        this._inputList.forEach((inputElement, index) => {
-            this._inputValues[index] = inputElement.value
-          });
+        this._inputList.forEach((inputElement) => {
+            this._inputValues[inputElement.name] = inputElement.value;
+        })
         return this._inputValues;
     }
 
-    _setEventListeners() {
-        super.setCloseEventListeners();
+    setEventListeners() {
+        super.setEventListeners();
         this._form.addEventListener('submit', evt => {
             evt.preventDefault();
             this.renderLoading(true, '');
-            this._onSubmit(this._getInputValues())
+            this._onSubmit(this._getInputValues());
           });
     }
 
@@ -43,7 +39,4 @@ export class PopupWithForm extends Popup {
         }
       }
       
-    check() {
-       console.log(this._popupButton)
-    }
 }

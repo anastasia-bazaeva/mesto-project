@@ -2,7 +2,6 @@
 export class Api {
     constructor (options) {
         this._url = options.url;
-        this._urlLikes = options.urlLikes;
         this._headers = options.headers;
     }
     checkResponse = (res) => {
@@ -60,7 +59,7 @@ export class Api {
     }
     
     changeLikeButton (dataId, isLiked) {
-        return fetch(`${this._urlLikes}/${dataId}`, {
+        return fetch(`${this._url}/cards/likes/${dataId}`, {
             method: isLiked ? 'DELETE' : 'PUT',
             headers: this._headers,
         })

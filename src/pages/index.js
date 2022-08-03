@@ -3,7 +3,7 @@ import './index.css';
 // Импортируем данные
 import { mestoContainer, popupZoom, mestoCards, zoomPic, zoomName,
    popupEdit, popupAdd, profileName, profileDescription, updateName, updateDescription,
-   enableValidationConfig, editAvatar, profileAvatar, forms, renderLoadingMainContent, removeErrorSpan } from '../components/utils.js';
+   enableValidationConfig, editAvatar, profileAvatar, forms, renderLoadingMainContent } from '../utils/utils.js';
   
   // Импортируем валидацию
   import { FormValidator } from '../components/FormValidator.js';  
@@ -21,9 +21,9 @@ import { mestoContainer, popupZoom, mestoCards, zoomPic, zoomName,
 renderLoadingMainContent(true);
 
 //создаем экземпляра класса Api
+//мы поменяли основную ссылку, теперь она одинаковая, но у нас отображается только 30 картинок
 const apiConfig = new Api ({
-  url: "https://mesto.nomoreparties.co/plus-cohort-13",
-  urlLikes: "https://nomoreparties.co/v1/plus-cohort-13/cards/likes",
+  url: "https://nomoreparties.co/v1/plus-cohort-13",
   headers: {
       "Content-Type": "application/json",
       "Authorization": "5f5f6516-2c69-4593-ad66-9a5c627fc536"
@@ -58,20 +58,26 @@ function cardCreation(data, profileID) {
     serverCards.addItem(cardCreation(item, profileID));
 }},
 mestoContainer);
-  
-  //запускаем валидацию
-  forms.forEach((form) => {
-    const formClass = new FormValidator (enableValidationConfig, form);
-    formClass.enableValidation();
-  })
+
+const formValidators = {}
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidation();
+  });
+};
+enableValidation(enableValidationConfig);
 
   //объект с попапом для редактирования профиля
   const popupEditProfile = new PopupWithForm (
     popupEdit,
     (inputValues) => {
       const userData = {
-        name: inputValues[0],
-        about: inputValues[1],
+        name: inputValues.name,
+        about: inputValues.description
       };
       apiConfig.editProfileInfo(userData)
         .then((data) => {
@@ -82,44 +88,47 @@ mestoContainer);
         .finally(() => popupEditProfile.renderLoading(false, 'Сохранить')) 
     }
   );
+  popupEditProfile.setEventListeners();
 
   //объект с попапом добавления нового места
   const popupAddForm = new PopupWithForm (
     popupAdd,
     (inputValues) => {
       const post = {
-        name: inputValues[0],
-        link: inputValues[1],
-      };
+        name: inputValues.placeName,
+        link: inputValues.placeDescription
+      }
       apiConfig.addCardToServer(post)
         .then((cardData) => {
           serverCards.addItem(cardCreation(cardData, profileID));
           popupAddForm.closePopup();
         })
         .catch(err => console.log(`С добавлением карточки что-то не так: ${err}`))
-        .finally(() => popupAddForm.renderLoading(false, 'Создать')) 
+        .finally(() => popupAddForm.renderLoading(false, 'Создать'))
   },
 );
+popupAddForm.setEventListeners();
 
   // объект с редактированием аватара
   const popupEditAvatar = new PopupWithForm (
     editAvatar,
     (inputValues) => {
       const avatarData = {
-         avatar: inputValues[0]
+         avatar: inputValues.avatarUrl,
       };
       apiConfig.editProfilePic(avatarData)
-      .then(() => {
-        apiConfig.getProfile()
-        .then((data) => user.setUserAvatar(data))
-        popupEditAvatar.closePopup() 
-      })
+      .then((data) => {
+        user.setUserAvatar(data);
+        popupEditAvatar.closePopup();
+       })
       .catch(err => console.log(`При редактировании аватара профиля что-то пошло не так: ${err}`))
       .finally(() => popupEditAvatar.renderLoading(false, 'Сохранить')) 
     }
   );
+  popupEditAvatar.setEventListeners();
 
   const imagePopup = new PopupWithImage(popupZoom, zoomPic, zoomName);
+  imagePopup.setEventListeners();
 
   //получаем данные профиля и картинки с сервера
   Promise.all([apiConfig.getProfile(), apiConfig.getAllCards()])
@@ -127,30 +136,28 @@ mestoContainer);
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
     profileID = profileData._id;
-    serverCards.renderItems(cardsData);
+    serverCards.renderItems(cardsData.reverse());
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
   .finally(() => renderLoadingMainContent(false))
 
   //слушатель для открытия попапа редактирования профиля
   document.querySelector('.profile__edit-button').addEventListener('click', () => {
-    updateName.value = profileName.textContent;
-    updateDescription.value = profileDescription.textContent;
+    updateName.value = user.getUserInfo().userName;
+    updateDescription.value = user.getUserInfo().userAbout;
     popupEditProfile.openPopup();
-    removeErrorSpan(popupEdit);
+    formValidators["profile_edit"].resetValidation();
   });
   
  
   // слушатель для открытия попапа добавления Места
   document.querySelector('.profile__add-button').addEventListener('click', () => {
     popupAddForm.openPopup();
-    removeErrorSpan(popupAdd);
+    formValidators["profile_add"].resetValidation();
   })
 
    //слушатель  для открытия попапа редактирования аватара
    document.querySelector('.profile__avatar-button').addEventListener('click', () => {
     popupEditAvatar.openPopup();
-    removeErrorSpan(editAvatar);
+    formValidators["avatar_add"].resetValidation();
   });
-
-  export { profileID }

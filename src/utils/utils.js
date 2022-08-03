@@ -78,13 +78,7 @@ const initialCards = [
     }
   }
 
-  const removeErrorSpan = (popup) => {
-    const errorSpan = Array.from(popup.querySelectorAll('.popup__item-error'));
-    errorSpan.forEach(span => {
-      span.textContent = '';
-    });
-  }
 
 export { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic, mestoCards, spinners, forms, renderLoadingMainContent, removeErrorSpan };
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic, mestoCards, spinners, forms, renderLoadingMainContent };

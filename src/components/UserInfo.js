@@ -21,7 +21,4 @@ export class UserInfo {
     setUserAvatar(data) {
         this._avatar.src = data.avatar;
     }
-    check() {
-        console.log(this._popup)
-      }
 }
