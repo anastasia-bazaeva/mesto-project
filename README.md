@@ -1,4 +1,5 @@
 # Проект: Место
+[Ссылка на демо](https://anastasia-bazaeva.github.io/mesto-project/)
 
 **Описание**
 
@@ -11,5 +12,3 @@
 * кнопки
 * медиазапросы для поддержания адаптива
 * работа с функциями и массивами на javaScript для реализации интерактивных элементов
-
-[Ссылка на проект github](https://anastasia-bazaeva.github.io/mesto-project/)
