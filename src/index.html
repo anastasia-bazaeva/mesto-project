@@ -34,7 +34,7 @@
        </footer>
        <div class="popup popup_form_edit-profile">
         <div class="popup__window">
-        <form class="popup__container popup_profile-edit" name="profile_edit" novalidate>
+        <form class="popup__container popup_profile-edit" name="profile_edit" novalidate id="form">
             <fieldset class="popup__form">
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <input class="popup__item popup__item_el_name" name="name" type="text" id="name" placeholder="Ваше имя" minlength = "2" maxlength="40" required>
@@ -47,18 +47,20 @@
          <button class="popup__button popup__button_status_close" type="button"></button>
       </div>
     </div>
+
     <div class="popup popup_form_new-place">
         <div class="popup__window">
-        <form class="popup__container popup_place-add" name="profile_add" novalidate>
+        <form class="popup__container popup_place-add" name="profile_add" id="form" novalidate>
             <fieldset class="popup__form place-adding">
                 <h2 class="popup__heading">Новое место</h2>
-                <input class="popup__item popup__item_el_place-name popup__item_form_place-add" name="place-name" type="text" id="place-name" placeholder="Название" minlength="2" maxlength="30" required>
-                <span id="place-name-error" class="popup__item-error"></span>
-                <input class="popup__item popup__item_el_place-url popup__item_form_place-add" name="place-description" type="url" id="place-description" placeholder="Ссылка на место" required>
-                <span id="place-description-error" class="popup__item-error"></span>
-                <button class="popup__button popup__button_status_create popup__button_state_inactive" type="submit" disabled>Создать</button>
+                <input class="popup__item popup__item_el_place-name popup__item_form_place-add" name="placeName" type="text" id="placeName" placeholder="Название" minlength="2" maxlength="30" required>
+                <span id="placeName-error" class="popup__item-error"></span>
+                <input class="popup__item popup__item_el_place-url popup__item_form_place-add" name="placeDescription" type="url" id="placeDescription" placeholder="Ссылка на место" required>
+                <span id="placeDescription-error" class="popup__item-error"></span>
+                <button class="popup__button popup__button_status_save popup__button_state_inactive" type="submit" disabled>Создать</button>
             </fieldset>
         </form>
+
         <button class="popup__button popup__button_status_close" type="button"></button>
      </div>
     </div>
@@ -71,11 +73,11 @@
     </div>
     <div class="popup popup_edit_avatar">
         <div class="popup__window">
-        <form class="popup__container popup_avatar_add" name="avatar_add" novalidate>
+        <form class="popup__container popup_avatar_add" name="avatar_add" novalidate id="form">
             <fieldset class="popup__form avatar_add">
                 <h2 class="popup__heading">Обновить аватар</h2>
-                <input class="popup__item popup__item_el_avatar-add popup__item_form_avatar-add" name="avatar-url" type="url" id="avatar-url" placeholder="Ссылка на фото" required>
-                <span id="avatar-url-error" class="popup__item-error"></span>
+                <input class="popup__item popup__item_el_avatar-add popup__item_form_avatar-add" name="avatarUrl" type="url" id="avatarUrl" placeholder="Ссылка на фото" required>
+                <span id="avatarUrl-error" class="popup__item-error"></span>
                 <button class="popup__button popup__button_status_save popup__button_state_inactive" type="submit">Сохранить</button>
             </fieldset>
         </form>

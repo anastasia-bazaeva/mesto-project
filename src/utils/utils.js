@@ -51,19 +51,34 @@ const initialCards = [
   const placeUrl = document.querySelector('.popup__item_el_place-url');
   const mestoCards = document.querySelector('#new-mesto').content;
   const spinners = Array.from(document.querySelectorAll('.spinner'));
-  
+  const forms = Array.from(document.querySelectorAll('.popup__container'));
+
   const enableValidationConfig = {
     formSelector: '.popup__container',
     inputSelector: '.popup__item',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_state_inactive',
     inputErrorClass: 'popup__item_state_invalid',
+    errorSpanClass: '.popup__item-error',
     customMessages: {
       urlMismatch: 'Введите адрес сайта',
       missedInput: 'Вы пропустили это поле',
     },
-  }; 
+  };
+
+  function renderLoadingMainContent (isLoading) {
+    if(isLoading) {
+      spinners.forEach((spinner) => {
+        spinner.classList.add('spinner_visible');
+      })
+    } else {
+      spinners.forEach((spinner) => {
+        spinner.classList.remove('spinner_visible');
+      })
+    }
+  }
+
 
 export { initialCardsInRigthOrder,  mestoContainer, popupZoom, zoomPic, 
     zoomName, popupEdit, popupAdd, editForm, profileName, profileDescription, updateName, updateDescription,
-    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic, mestoCards, spinners };
+    addForm,  addPopup, page, anyPopup, editAvatar, enableValidationConfig, placeName, placeUrl, profileAvatar, updateAvatarPic, mestoCards, spinners, forms, renderLoadingMainContent };
